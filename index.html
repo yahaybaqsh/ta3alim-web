@@ -1,0 +1,2430 @@
+<html lang="ar" dir="rtl">
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            background-color: white;
+            /* Ensure the iframe has a white background */
+        }
+    </style>
+</head>
+
+<body>
+    <!DOCTYPE html>
+    <html lang="ar" dir="rtl">
+
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>مرجع HTML5 الشامل – يحيى باقش</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;700&display=swap" rel="stylesheet">
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+            
+             :root {
+                --primary: #2563eb;
+                --secondary: #1d4ed8;
+                --accent: #60a5fa;
+                --light: #f8fafc;
+                --dark: #0f172a;
+                --gray: #64748b;
+                --success: #10b981;
+                --warning: #f59e0b;
+                --danger: #ef4444;
+                --border: #e2e8f0;
+                --code-bg: #1e293b;
+                --code-text: #e2e8f0;
+                --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
+                --shadow-md: 0 10px 15px -3px rgba(37, 99, 235, 0.1), 0 4px 6px -2px rgba(37, 99, 235, 0.05);
+                --sidebar-width: 280px;
+                --header-height: 70px;
+            }
+            
+            body {
+                font-family: 'Cairo', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+                color: var(--dark);
+                line-height: 1.7;
+                padding: 0;
+            }
+            
+            .container {
+                display: flex;
+                min-height: 100vh;
+            }
+            /* Sidebar Styles */
+            
+            .sidebar {
+                width: var(--sidebar-width);
+                background: linear-gradient(180deg, var(--primary), var(--secondary));
+                color: white;
+                padding: 20px 0;
+                height: 100vh;
+                position: fixed;
+                overflow-y: auto;
+                box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+                z-index: 100;
+            }
+            
+            .sidebar-header {
+                padding: 0 20px 20px;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+                margin-bottom: 20px;
+            }
+            
+            .sidebar-header h1 {
+                font-size: 1.4rem;
+                font-weight: 700;
+            }
+            
+            .sidebar-header p {
+                font-size: 0.9rem;
+                opacity: 0.9;
+                margin-top: 5px;
+            }
+            
+            .nav-links {
+                list-style: none;
+                padding: 0 10px;
+            }
+            
+            .nav-links li {
+                margin-bottom: 8px;
+            }
+            
+            .nav-links a {
+                color: white;
+                text-decoration: none;
+                padding: 12px 20px;
+                display: block;
+                border-radius: 8px;
+                transition: background 0.2s;
+                font-weight: 500;
+            }
+            
+            .nav-links a:hover,
+            .nav-links a.active {
+                background: rgba(255, 255, 255, 0.15);
+            }
+            
+            .nav-links a::before {
+                content: '•';
+                color: var(--accent);
+                margin-left: 8px;
+                font-weight: bold;
+            }
+            /* Main Content */
+            
+            .main-content {
+                flex: 1;
+                margin-right: var(--sidebar-width);
+                padding: 20px;
+            }
+            
+            .chapter {
+                display: block;
+                /* عرض جميع الفصول بشكل دائم */
+                display: none;
+                max-width: 1000px;
+                margin: 0 auto;
+            }
+            
+            .chapter.active {
+                display: block;
+            }
+            
+            .chapter-header {
+                text-align: center;
+                padding: 40px 20px;
+                background: linear-gradient(135deg, var(--primary), var(--secondary));
+                color: white;
+                border-radius: 20px;
+                margin-bottom: 30px;
+                box-shadow: 0 10px 25px rgba(37, 99, 235, 0.3);
+                position: relative;
+                overflow: hidden;
+            }
+            
+            .chapter-header::before {
+                content: '';
+                position: absolute;
+                top: -50%;
+                left: -50%;
+                width: 200%;
+                height: 200%;
+                background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+                transform: rotate(30deg);
+            }
+            
+            .chapter-header h1 {
+                font-size: 2.5rem;
+                margin-bottom: 15px;
+                position: relative;
+            }
+            
+            .chapter-header .subtitle {
+                font-size: 1.2rem;
+                opacity: 0.95;
+                max-width: 700px;
+                margin: 0 auto;
+                position: relative;
+            }
+            
+            .section {
+                background: white;
+                padding: 25px;
+                border-radius: 16px;
+                margin-bottom: 25px;
+                box-shadow: var(--shadow-sm);
+                border: 1px solid var(--border);
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+            }
+            
+            .section:hover {
+                transform: translateY(-5px);
+                box-shadow: var(--shadow-md);
+            }
+            
+            .section h2 {
+                color: var(--primary);
+                margin-bottom: 20px;
+                font-size: 1.7rem;
+                display: flex;
+                align-items: center;
+                gap: 12px;
+            }
+            
+            .section h2::before {
+                content: '•';
+                color: var(--accent);
+                font-size: 1.8rem;
+            }
+            
+            .tag-name {
+                font-family: monospace;
+                background: var(--accent);
+                color: var(--dark);
+                padding: 2px 8px;
+                border-radius: 6px;
+                font-weight: bold;
+            }
+            
+            .functionality,
+            .why-important,
+            .when-to-use {
+                padding: 16px;
+                border-radius: 12px;
+                margin: 15px 0;
+            }
+            
+            .functionality {
+                background: #f1f5f9;
+                border-left: 4px solid var(--primary);
+            }
+            
+            .why-important {
+                background: #f0fdf4;
+                border-left: 4px solid var(--success);
+            }
+            
+            .when-to-use {
+                background: #f0fdf4;
+                border-left: 4px solid var(--success);
+            }
+            
+            .example {
+                background: var(--code-bg);
+                color: var(--code-text);
+                padding: 20px;
+                border-radius: 12px;
+                margin: 20px 0;
+                font-family: 'Courier New', monospace;
+                font-size: 1.05rem;
+                overflow-x: auto;
+                direction: ltr;
+                text-align: left;
+            }
+            
+            .pro-tip {
+                background: #fffbeb;
+                padding: 18px;
+                border-radius: 12px;
+                margin: 15px 0;
+                border-left: 4px solid var(--warning);
+                color: #854d0e;
+            }
+            
+            .warning {
+                background: #fef2f2;
+                padding: 18px;
+                border-radius: 12px;
+                margin: 15px 0;
+                border-left: 4px solid var(--danger);
+                color: #991b1b;
+            }
+            
+            .comparison-table,
+            .summary-table {
+                width: 100%;
+                border-collapse: collapse;
+                margin: 25px 0;
+            }
+            
+            .comparison-table th,
+            .summary-table th {
+                background: var(--primary);
+                color: white;
+                padding: 14px;
+                text-align: right;
+            }
+            
+            .comparison-table td,
+            .summary-table td {
+                padding: 12px;
+                border-bottom: 1px solid var(--border);
+                text-align: right;
+            }
+            
+            .comparison-table tr:nth-child(even),
+            .summary-table tr:nth-child(even) {
+                background: #f8fafc;
+            }
+            
+            .comparison-table tr:hover,
+            .summary-table tr:hover {
+                background: #f1f5f9;
+            }
+            
+            .tag-cell {
+                font-family: monospace;
+                background: #e0f2fe;
+                padding: 4px 8px;
+                border-radius: 4px;
+                color: var(--primary);
+                font-weight: bold;
+            }
+            
+            footer {
+                text-align: center;
+                padding: 30px;
+                color: var(--gray);
+                font-size: 1.1rem;
+                margin-top: 30px;
+            }
+            /* Responsive Design */
+            
+            @media (max-width: 992px) {
+                .sidebar {
+                    width: 240px;
+                }
+                .main-content {
+                    margin-right: 240px;
+                }
+            }
+            
+            @media (max-width: 768px) {
+                .container {
+                    flex-direction: column;
+                }
+                .sidebar {
+                    position: relative;
+                    width: 100%;
+                    height: auto;
+                    max-height: 300px;
+                    overflow-y: auto;
+                }
+                .main-content {
+                    margin-right: 0;
+                }
+                .chapter-header h1 {
+                    font-size: 2rem;
+                }
+                .chapter-header .subtitle {
+                    font-size: 1.1rem;
+                }
+            }
+            
+            @media (max-width: 480px) {
+                .sidebar {
+                    max-height: 250px;
+                }
+                .chapter-header h1 {
+                    font-size: 1.8rem;
+                }
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="container">
+            <!-- Sidebar Navigation -->
+            <aside class="sidebar">
+                <div class="sidebar-header">
+                    <h1>مرجع HTML5</h1>
+                    <p>يحيى باقش – دليل المطور العربي</p>
+                </div>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="#" class="nav-link active" data-chapter="1">الفصل 1: مقدمة</a></li>
+                    <li><a href="#" class="nav-link" data-chapter="2">الفصل 2: الوسوم الأساسية</a></li>
+                    <li><a href="#" class="nav-link" data-chapter="3">الفصل 3: وسوم التنسيق</a></li>
+                    <li><a href="#" class="nav-link" data-chapter="4">الفصل 4: الجداول والقوائم والنماذج</a></li>
+                    <li><a href="#" class="nav-link" data-chapter="5">الفصل 5: وسوم الميديا</a></li>
+                    <li><a href="#" class="nav-link" data-chapter="6">الفصل 6: التخطيط الدلالي</a></li>
+                    <li><a href="#" class="nav-link" data-chapter="7">الفصل 7: وسوم HTML5 الجديدة</a></li>
+                    <li><a href="#" class="nav-link" data-chapter="8">الفصل 8: الوسوم غير المدعومة</a></li>
+                </ul>
+            </aside>
+
+            <!-- Main Content -->
+            <main class="main-content">
+                <!-- Chapter 1 -->
+                <div id="chapter-1" class="chapter active">
+                    <div class="chapter-header">
+                        <h1>مرحباً بك في مرجع HTML5 الشامل</h1>
+                        <p class="subtitle">دليل المطور العربي من البداية إلى الاحتراف — جميع الفصول في صفحة واحدة</p>
+                    </div>
+
+                    <div class="section">
+                        <h2>الدرس الأول: مقدمة شاملة + الهياكل الرئيسية لـ HTML</h2>
+                        <div class="functionality">
+                            <h3>ما هو HTML؟</h3>
+                            <p><strong>HTML</strong> (لغة توصيف النص التشعبي – HyperText Markup Language) هي الهيكل الأساسي لأي صفحة ويب. لا تقوم بتنفيذ منطق أو حسابات (مثل لغات البرمجة)، بل تُستخدم لـ<strong>وصف محتوى الصفحة</strong> وتنظيمه عبر وسوم (Tags)
+                                تُخبر المتصفح بكيفية عرض العناصر.</p>
+                        </div>
+                        <div class="pro-tip">
+                            <strong>لماذا تُسمى "لغة توصيف" وليس "لغة برمجة"؟</strong><br> لأنها لا تحتوي على تعليمات تنفيذية، بل وسوم تَصِف طبيعة المحتوى (عنوان، فقرة، صورة...).
+                        </div>
+                    </div>
+
+                    <div class="section">
+                        <h2>الفرق بين: الوسم (Tag) – العنصر (Element) – السمة (Attribute)</h2>
+                        <table class="comparison-table">
+                            <thead>
+                                <tr>
+                                    <th>المصطلح</th>
+                                    <th>التعريف</th>
+                                    <th>مثال</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>الوسم (Tag)</strong></td>
+                                    <td>رمز بين زاويتين &lt; &gt; يُستخدم لتحديد نوع المحتوى.</td>
+                                    <td><span class="tag-cell">&lt;p&gt;</span>, <span class="tag-cell">&lt;/p&gt;</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>العنصر (Element)</strong></td>
+                                    <td>يتكون من وسم افتتاحي + محتوى + وسم إغلاق.</td>
+                                    <td><span class="tag-cell">&lt;p&gt;هذه فقرة&lt;/p&gt;</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>السمة (Attribute)</strong></td>
+                                    <td>معلومات إضافية داخل الوسم الافتتاحي.</td>
+                                    <td>السمة <code>href</code> في <code>&lt;a href="..."&gt;</code></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="warning">
+                            ⚠️ بعض الوسوم <strong>ذاتية الإغلاق</strong> (لا تحتاج وسم إغلاق)، مثل: <code>&lt;img&gt;</code>, <code>&lt;br&gt;</code>, <code>&lt;hr&gt;</code>, <code>&lt;input&gt;</code>.
+                        </div>
+                    </div>
+
+                    <div class="section">
+                        <h2>الهيكل الكامل لمستند HTML5 (مع شرح كل سطر)</h2>
+                        <img src="carbon.png" style="width: 100%; max-width: 500px; display: block; margin: 20px auto; border-radius: 8px;">
+                        <div class="example">
+                            &lt;!DOCTYPE html&gt; &lt;html lang="ar" dir="rtl"&gt; &lt;head&gt; &lt;meta charset="UTF-8"&gt; &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt; &lt;title&gt;عنوان الصفحة&lt;/title&gt; &lt;link rel="stylesheet" href="style.css"&gt;
+                            &lt;/head&gt; &lt;body&gt; &lt;!-- كل المحتوى المرئي هنا --&gt; &lt;/body&gt; &lt;/html&gt;
+                        </div>
+                        <div class="functionality" style="margin-top: 20px;">
+                            <h4>شرح مفصّل:</h4>
+                            <p><strong>1. <code>&lt;!DOCTYPE html&gt;</code></strong><br> - يُخبر المتصفح أن الصفحة مكتوبة بمواصفات <strong>HTML5</strong>.<br> - يجب أن يكون <strong>أول سطر</strong> في الملف.</p>
+
+                            <p><strong>2. <code>&lt;html lang="ar" dir="rtl"&gt;</code></strong><br> - <code>lang="ar"</code>: يُحدد أن لغة المحتوى هي <strong>العربية</strong> (مهم لمحركات البحث وتقنيات الوصول).<br> - <code>dir="rtl"</code>: يُحدد اتجاه
+                                النص من <strong>اليمين إلى اليسار</strong> (ضروري للغات العربية).</p>
+
+                            <p><strong>3. <code>&lt;head&gt;</code></strong><br> - يحتوي على بيانات تعريفية <strong>لا تُعرض للمستخدم</strong>، لكنها ضرورية للمتصفح ومحركات البحث.<br> - أهم العناصر داخل <code>&lt;head&gt;</code>:<br> &nbsp;&nbsp;– <code>&lt;meta charset="UTF-8"&gt;</code>:
+                                يحدد ترميز الأحرف (UTF-8 يدعم جميع اللغات).<br> &nbsp;&nbsp;– <code>&lt;meta name="viewport"&gt;</code>: يجعل الصفحة <strong>متجاوبة</strong> مع شاشات الجوال.<br> &nbsp;&nbsp;– <code>&lt;title&gt;</code>: عنوان الصفحة (يظهر
+                                في تبويب المتصفح).<br> &nbsp;&nbsp;– <code>&lt;link&gt;</code>: لربط ملفات CSS خارجية.</p>
+
+                            <p><strong>4. <code>&lt;body&gt;</code></strong><br> - يحتوي على <strong>كل المحتوى المرئي</strong> الذي يراه المستخدم.</p>
+
+                        </div>
+                        <h2>مثل كل المحتوى المرئي الذي يراه المستخدم</h2>
+
+                        <img src="44.png" style="width: 100%; max-width: 500px; display: block; margin: 20px auto; border-radius: 8px;">
+
+                    </div>
+
+                    <footer>
+                        <p>مرجع HTML5 الشامل • تأليف: يحيى باقش • جميع الحقوق محفوظة</p>
+                    </footer>
+
+                </div>
+
+
+
+
+
+
+
+
+
+
+
+
+                <!-- Chapter 2 -->
+                <div id="chapter-2" class="chapter">
+                    <div class="chapter-header">
+                        <h1>الفصل 2️⃣: الوسوم الأساسية (Basic Tags)</h1>
+                        <p class="subtitle">دليل شامل مع أمثلة عملية لكل وسم</p>
+                    </div>
+                    <div class="section">
+                        <h2>الوسوم الأساسية: اللبنات الأولى لأي صفحة ويب</h2>
+                        <p>الوسوم الأساسية هي اللبنات الأولى لأي صفحة ويب. بدونها، لا يمكن بناء هيكل منطقي أو عرض محتوى. في هذا الفصل، سنغطي كل وسم ضروري يجب أن يعرفه أي مطور ويب.</p>
+                    </div>
+                    <div class="section">
+                        <h2><span class="tag-name">&lt;!DOCTYPE html&gt;</span></h2>
+                        <div class="functionality">
+                            <strong>الوظيفة:</strong> يُخبر المتصفح أن الصفحة مكتوبة باستخدام <strong>HTML5</strong> (أحدث إصدار من لغة HTML).<br> هذا ليس وسمًا تقنيًّا، بل <strong>إعلان نوع المستند</strong> (Document Type Declaration).
+                        </div>
+                        <div class="why-important">
+                            <strong>لماذا هو ضروري؟</strong><br> • بدونه، قد يعرض المتصفح الصفحة في "وضع التوافق" (Quirks Mode)، مما يؤدي إلى سلوك غير متوقع.<br> • يجب أن يكون <strong>أول سطر</strong> في ملف HTML.
+                        </div>
+                        <div class="example">
+                            &lt;!DOCTYPE html&gt;<br> &lt;html&gt;
+                            <br> &nbsp;&nbsp;&lt;!-- باقي الكود --&gt;<br> &lt;/html&gt;
+                        </div>
+                        <div class="pro-tip">
+                            ✅ <strong>ملاحظة احترافية</strong>: لا يحتاج إلى إغلاق، ولا يحتوي على سمات.
+                        </div>
+                    </div>
+                    <div class="section">
+                        <h2><span class="tag-name">&lt;html&gt;</span></h2>
+                        <div class="functionality">
+                            <strong>الوظيفة:</strong> الوسم الجذري (Root Element) الذي يحتوي <strong>كل محتوى الصفحة</strong>.<br> كل ما في الصفحة يجب أن يكون داخل <code>&lt;html&gt;...&lt;/html&gt;</code>.
+                        </div>
+                        <div class="why-important">
+                            <strong>السمات المهمة:</strong><br> • <code>lang="ar"</code>: يحدد أن لغة المحتوى هي <strong>العربية</strong> (ضروري لتحسين محركات البحث وتقنيات الوصول).<br> • <code>dir="rtl"</code>: يحدد اتجاه النص من <strong>اليمين إلى اليسار</strong>                            (مهم جدًّا للغة العربية).
+                        </div>
+                        <div class="example">
+                            &lt;!DOCTYPE html&gt;<br> &lt;html lang="ar" dir="rtl"&gt;<br> &nbsp;&nbsp;&lt;head&gt;...&lt;/head&gt;
+                            <br> &nbsp;&nbsp;&lt;body&gt;...&lt;/body&gt;
+                            <br> &lt;/html&gt;
+                        </div>
+                        <div class="warning">
+                            ⚠️ <strong>تحذير</strong>: لا تضع أي محتوى خارج <code>&lt;html&gt;</code>.
+                        </div>
+                    </div>
+                    <div class="section">
+                        <h2><span class="tag-name">&lt;head&gt;</span></h2>
+                        <div class="functionality">
+                            <strong>الوظيفة:</strong> حاوية للمعلومات <strong>غير المرئية</strong> التي تصف الصفحة، مثل العنوان، الترميز، الروابط، والبيانات الوصفية.
+                        </div>
+                        <div class="why-important">
+                            <strong>ما يحتويه عادةً:</strong><br> • <code>&lt;title&gt;</code>: عنوان الصفحة.<br> • <code>&lt;meta&gt;</code>: معلومات مثل ترميز الأحرف، وصف الصفحة، توافق الجوال.<br> • <code>&lt;link&gt;</code>: روابط لملفات CSS.<br> •
+                            <code>&lt;script&gt;</code>: أحيانًا لروابط JavaScript (غالبًا في <code>&lt;body&gt;</code>).
+                        </div>
+                        <div class="example">
+                            &lt;head&gt;<br> &nbsp;&nbsp;&lt;meta charset="UTF-8"&gt;<br> &nbsp;&nbsp;&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;<br> &nbsp;&nbsp;&lt;meta name="description" content="مرجع شامل لتعلم HTML5
+                            بالعربية"&gt;
+                            <br> &nbsp;&nbsp;&lt;title&gt;مرجع HTML5&lt;/title&gt;<br> &nbsp;&nbsp;&lt;link rel="stylesheet" href="style.css"&gt;<br> &lt;/head&gt;
+                        </div>
+                        <div class="pro-tip">
+                            ✅ <strong>أفضل ممارسة</strong>: دائمًا ضع <code>&lt;meta charset="UTF-8"&gt;</code> أولًا لتجنب مشاكل الترميز.
+                        </div>
+                    </div>
+                    <div class="section">
+                        <h2><span class="tag-name">&lt;title&gt;</span></h2>
+                        <div class="functionality">
+                            <strong>الوظيفة:</strong> يحدد <strong>عنوان الصفحة</strong> الذي يظهر في:<br> • تبويب المتصفح.<br> • نتائج محركات البحث (Google).<br> • عند مشاركة الرابط على وسائل التواصل.
+                        </div>
+                        <div class="example">
+                            &lt;title&gt;المرجع الاحترافي لـ HTML5 – دليل المطور العربي&lt;/title&gt;
+                        </div>
+                        <div class="pro-tip">
+                            🔍 <strong>نصيحة SEO</strong>: اجعل العنوان واضحًا، فريدًا، وتحت 60 حرفًا.
+                        </div>
+                    </div>
+                    <div class="section">
+                        <h2><span class="tag-name">&lt;body&gt;</span></h2>
+                        <div class="functionality">
+                            <strong>الوظيفة:</strong> يحتوي على <strong>كل المحتوى المرئي</strong> الذي يراه المستخدم: نصوص، صور، روابط، أزرار، إلخ.
+                        </div>
+                        <div class="example">
+                            &lt;body&gt;<br> &nbsp;&nbsp;&lt;h1&gt;مرحباً بك في موقعنا!&lt;/h1&gt;<br> &nbsp;&nbsp;&lt;p&gt;هذه أول صفحة ويب لي.&lt;/p&gt;<br> &lt;/body&gt;
+                        </div>
+                        <div class="pro-tip">
+                            ✅ <strong>ملاحظة</strong>: يمكنك إضافة سمات مثل <code>class</code> أو <code>id</code> لاستهدافه بـ CSS أو JavaScript.
+                        </div>
+                    </div>
+                    <div class="section">
+                        <h2>العناوين: <span class="tag-name">&lt;h1&gt;</span> إلى <span class="tag-name">&lt;h6&gt;</span></h2>
+                        <div class="functionality">
+                            <strong>الوظيفة:</strong> لتحديد <strong>عناوين وعناوين فرعية</strong> بستة مستويات من الأهمية.
+                        </div>
+                        <div class="example">
+                            &lt;h1&gt;تعلم HTML5&lt;/h1&gt;<br> &lt;h2&gt;الوسوم الأساسية&lt;/h2&gt;<br> &lt;h3&gt;ما هو الوسم؟&lt;/h3&gt;<br> &lt;h4&gt;أنواع الوسوم&lt;/h4&gt;
+                        </div>
+                        <div class="warning">
+                            ❌ <strong>أخطاء شائعة</strong>:<br> • استخدام <code>&lt;h1&gt;</code> أكثر من مرة.<br> • تخطي المستويات (مثل: <code>&lt;h1&gt;</code> ثم <code>&lt;h3&gt;</code> مباشرةً).
+                        </div>
+                    </div>
+                    <div class="section">
+                        <h2><span class="tag-name">&lt;p&gt;</span> – الفقرة</h2>
+                        <div class="functionality">
+                            <strong>الوظيفة:</strong> لتمثيل <strong>وحدة نصية مستقلة</strong> (فقرة).<br> يُضيف مسافات فارغة تلقائية أعلى وأسفل الفقرة.
+                        </div>
+                        <div class="example">
+                            &lt;p&gt;HTML هي لغة توصيف تُستخدم لإنشاء صفحات الويب.&lt;/p&gt;<br> &lt;p&gt;لا تُعد لغة برمجة، بل لغة وسم.&lt;/p&gt;
+                        </div>
+                        <div class="pro-tip">
+                            ✅ <strong>تلميح</strong>: لا تستخدم <code>&lt;p&gt;</code> لترك مسافات فارغة — استخدم CSS بدلاً من ذلك.
+                        </div>
+                    </div>
+                    <div class="section">
+                        <h2><span class="tag-name">&lt;a&gt;</span> – الرابط التشعبي (Anchor)</h2>
+                        <div class="functionality">
+                            <strong>الوظيفة:</strong> لإنشاء <strong>روابط</strong> إلى صفحات أخرى، ملفات، عناوين بريد، أو أرقام هواتف.
+                        </div>
+                        <div class="why-important">
+                            <strong>السمات الأساسية:</strong><br> • <code>href</code>: وجهة الرابط.<br> • <code>target="_blank"</code>: لفتح الرابط في تبويب جديد.<br> • <code>rel="noopener"</code>: إلزامي عند استخدام <code>target="_blank"</code> لأمان
+                            الموقع.
+                        </div>
+                        <div class="example">
+                            &lt;!-- رابط خارجي --&gt;<br> &lt;a href="https://www.mozilla.org"&gt;زيارة Mozilla&lt;/a&gt;<br><br> &lt;!-- رابط داخلي --&gt;<br> &lt;a href="/about.html"&gt;من نحن&lt;/a&gt;<br><br> &lt;!-- بريد إلكتروني --&gt;<br> &lt;a
+                            href="mailto:yahya@example.com"&gt;أرسل بريدًا&lt;/a&gt;<br><br> &lt;!-- رقم هاتف --&gt;<br> &lt;a href="tel:+966500000000"&gt;اتصل بنا&lt;/a&gt;<br><br> &lt;!-- رابط في تبويب جديد (آمن) --&gt;<br> &lt;a href="https://example.com"
+                            target="_blank" rel="noopener"&gt;رابط خارجي&lt;/a&gt;
+                        </div>
+                        <div class="pro-tip">
+                            🔒 <strong>أمان</strong>: دائمًا أضف <code>rel="noopener"</code> مع <code>target="_blank"</code> لمنع هجمات التصيد.
+                        </div>
+                    </div>
+                    <div class="section">
+                        <h2><span class="tag-name">&lt;img&gt;</span> – الصورة</h2>
+                        <div class="functionality">
+                            <strong>الوظيفة:</strong> لإدراج <strong>صورة</strong> في الصفحة.
+                        </div>
+                        <div class="why-important">
+                            <strong>السمات الإلزامية:</strong><br> • <code>src</code>: مسار الصورة (نسبي مثل <code>"images/logo.png"</code> أو مطلق مثل <code>"https://site.com/logo.png"</code>).<br> • <code>alt</code>: وصف نصي للصورة (ضروري لذوي الاحتياجات
+                            الخاصة ولتحسين SEO).<br><br>
+
+                            <strong>السمات الاختيارية:</strong><br> • <code>width</code> و<code>height</code>: لتحديد الأبعاد (يمنع "الارتداد البصري" أثناء التحميل).
+                        </div>
+                        <div class="example">
+                            &lt;img src="images/html5-logo.png"<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;alt="شعار HTML5 الرسمي"<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;width="200"
+                            <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;height="100"&gt;
+                        </div>
+                        <div class="pro-tip">
+                            ✅ <strong>أفضل ممارسة</strong>: استخدم دائمًا <code>alt</code> حتى لو كانت الصورة زخرفية (اكتب <code>alt=""</code> إذا لم تكن تحمل معنى).
+                        </div>
+                    </div>
+                    <div class="section">
+                        <h2><span class="tag-name">&lt;br&gt;</span> – فاصل سطر</h2>
+                        <div class="functionality">
+                            <strong>الوظيفة:</strong> لإدخال <strong>سطر جديد</strong> داخل نفس الفقرة (مثل Shift+Enter في Word).
+                        </div>
+                        <div class="example">
+                            &lt;p&gt;الاسم: أحمد علي&lt;br&gt;<br> العمر: 28 سنة&lt;br&gt;<br> المدينة: الرياض&lt;/p&gt;
+                        </div>
+                        <div class="warning">
+                            ⚠️ <strong>لا تستخدمه</strong> لترك مسافات بين الفقرات — استخدم <code>&lt;p&gt;</code> أو CSS.
+                        </div>
+                    </div>
+                    <div class="section">
+                        <h2><span class="tag-name">&lt;hr&gt;</span> – خط أفقي</h2>
+                        <div class="functionality">
+                            <strong>الوظيفة:</strong> لإدخال <strong>فاصل مرئي</strong> بين أقسام المحتوى.
+                        </div>
+                        <div class="example">
+                            &lt;h2&gt;القسم الأول&lt;/h2&gt;<br> &lt;p&gt;محتوى القسم الأول.&lt;/p&gt;<br> &lt;hr&gt;
+                            <br> &lt;h2&gt;القسم الثاني&lt;/h2&gt;<br> &lt;p&gt;محتوى القسم الثاني.&lt;/p&gt;
+                        </div>
+                        <div class="pro-tip">
+                            💡 <strong>ملاحظة</strong>: في HTML5، يُعتبر <code>&lt;hr&gt;</code> وسمًا <strong>دلاليًّا</strong> (ليس مجرد خط)، بل يُشير إلى تغيير في الموضوع.
+                        </div>
+                    </div>
+                    <div class="section">
+                        <h2>خلاصة الفصل 2</h2>
+                        <table class="summary-table">
+                            <thead>
+                                <tr>
+                                    <th>الوسم</th>
+                                    <th>الاستخدام الأساسي</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><span class="tag-cell">&lt;!DOCTYPE html&gt;</span></td>
+                                    <td>إعلان نوع المستند (HTML5)</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="tag-cell">&lt;html&gt;</span></td>
+                                    <td>الجذر الكامل للصفحة</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="tag-cell">&lt;head&gt;</span></td>
+                                    <td>معلومات غير مرئية (عنوان، ترميز، وصف)</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="tag-cell">&lt;title&gt;</span></td>
+                                    <td>عنوان الصفحة في التبويب</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="tag-cell">&lt;body&gt;</span></td>
+                                    <td>المحتوى المرئي</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="tag-cell">&lt;h1&gt;–&lt;h6&gt;</span></td>
+                                    <td>العناوين بمستويات الأهمية</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="tag-cell">&lt;p&gt;</span></td>
+                                    <td>فقرة نصية</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="tag-cell">&lt;a&gt;</span></td>
+                                    <td>رابط تشعبي</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="tag-cell">&lt;img&gt;</span></td>
+                                    <td>صورة</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="tag-cell">&lt;br&gt;</span></td>
+                                    <td>سطر جديد</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="tag-cell">&lt;hr&gt;</span></td>
+                                    <td>فاصل موضوعي</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="pro-tip" style="margin-top: 20px;">
+                            🎯 <strong>تذكّر دائمًا</strong>:<br> • الوسوم الأساسية تُشكّل <strong>هيكل الصفحة</strong>.<br> • النظافة في الهيكل = سهولة في الصيانة، تحسين في SEO، وتجربة أفضل للمستخدم.
+                        </div>
+                    </div>
+                    <footer>
+                        <p>تصميم احترافي باستخدام HTML5 وCSS3 الحديث</p>
+                    </footer>
+                </div>
+
+                <!-- Chapter 3 -->
+                <div id="chapter-3" class="chapter">
+                    <div class="chapter-header">
+                        <h1>الفصل 3️⃣: وسوم التنسيق (Formatting Tags)</h1>
+                        <p class="subtitle">دليل شامل لفهم الفرق بين <strong>الشكل البصري</strong> و<strong>المعنى الدلالي</strong></p>
+                    </div>
+                    <div class="intro">
+                        <h2>📌 مقدمة: لماذا نستخدم وسوم التنسيق؟</h2>
+                        <p>تُستخدم وسوم التنسيق لـ <strong>إبراز أجزاء محددة من النص</strong>، مثل جعله عريضًا، مائلًا، مشطوبًا، أو مُميّزًا.<br> لكن في HTML الحديث، لم يعد الهدف مجرد "تغيير المظهر"، بل <strong>إضفاء معنى لغوي أو دلالي</strong> على النص
+                            — وهو ما يُعرف بـ <strong>التنسيق الدلالي (Semantic Formatting)</strong>.</p>
+
+                        <div class="pro-tip">
+                            ✅ <strong>القاعدة الذهبية</strong>:<br> • إذا كان الهدف <strong>جماليًا فقط</strong> → استخدم <strong>CSS</strong>.<br> • إذا كان الهدف <strong>معنويًا</strong> (تأكيد، تأكيد صوتي، تمييز) → استخدم <strong>HTML</strong>.
+                        </div>
+                    </div>
+                    <div class="section">
+                        <h2><span class="tag-name">&lt;b&gt;</span> و<span class="tag-name">&lt;strong&gt;</span> – النص العريض</h2>
+                        <div class="functionality">
+                            <strong><span class="tag-name">&lt;b&gt;</span> – Bold (عريض بصري فقط)</strong><br> • <strong>الوظيفة</strong>: يجعل النص <strong>عريضًا دون إضافة أي معنى</strong>.<br> • <strong>متى تستخدمه؟</strong> عند الحاجة إلى لفت الانتباه
+                            <strong>بدون تأكيد معنوي</strong>، مثل: الكلمات المفتاحية في نص تسويقي.
+                        </div>
+                        <div class="example">
+                            &lt;p&gt;عرض خاص على &lt;b&gt;أجهزة الكمبيوتر&lt;/b&gt; هذا الأسبوع!&lt;/p&gt;
+                        </div>
+                        <div class="functionality">
+                            <strong><span class="tag-name">&lt;strong&gt;</span> – Strong Importance (تأكيد معنوي)</strong><br> • <strong>الوظيفة</strong>: يُشير إلى أن النص <strong>مهم أو جوهري</strong>.<br> • <strong>تأثير إضافي</strong>:<br> - المتصفحات
+                            الصوتية (لضعاف البصر) <strong>ترفع نبرة الصوت</strong> عند قراءته.<br> - محركات البحث (مثل جوجل) تُعطيه <strong>وزنًا أعلى</strong> في تحليل المحتوى.
+                        </div>
+                        <div class="example">
+                            &lt;p&gt;&lt;strong&gt;تحذير:&lt;/strong&gt; لا تقم بحذف هذا الملف.&lt;/p&gt;
+                        </div>
+                        <h3>🆚 المقارنة:</h3>
+                        <table class="comparison-table">
+                            <thead>
+                                <tr>
+                                    <th>المعيار</th>
+                                    <th><span class="tag-cell">&lt;b&gt;</span></th>
+                                    <th><span class="tag-cell">&lt;strong&gt;</span></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>المعنى</td>
+                                    <td>لا معنى دلالي</td>
+                                    <td>تأكيد/أهمية</td>
+                                </tr>
+                                <tr>
+                                    <td>إمكانية الوصول (Accessibility)</td>
+                                    <td>لا يؤثر</td>
+                                    <td>يُحسّن التجربة</td>
+                                </tr>
+                                <tr>
+                                    <td>SEO</td>
+                                    <td>لا تأثير</td>
+                                    <td>تأثير إيجابي</td>
+                                </tr>
+                                <tr>
+                                    <td>الاستخدام الموصى به</td>
+                                    <td>نادر (لأغراض بصرية بحتة)</td>
+                                    <td>مفضّل دائمًا</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="pro-tip">
+                            ✅ <strong>توصية احترافية</strong>: استخدم <code>&lt;strong&gt;</code> في 95% من الحالات. استخدم <code>&lt;b&gt;</code> فقط إذا كنت متأكدًا أنك لا تريد معنى دلاليًا.
+                        </div>
+                    </div>
+                    <div class="section">
+                        <h2><span class="tag-name">&lt;i&gt;</span> و<span class="tag-name">&lt;em&gt;</span> – النص المائل</h2>
+                        <div class="functionality">
+                            <strong><span class="tag-name">&lt;i&gt;</span> – Italic (مائل بصري فقط)</strong><br> • <strong>الوظيفة</strong>: يجعل النص <strong>مائلًا دون معنى</strong>.<br> • <strong>متى تستخدمه؟</strong><br> - أسماء الكتب، الأفلام، أو
+                            السفن (حسب قواعد التنسيق الأدبي).<br> - مصطلحات بلغة أجنبية.
+                        </div>
+                        <div class="example">
+                            &lt;p&gt;قرأت كتاب &lt;i&gt;الذكاء العاطفي&lt;/i&gt; مؤخرًا.&lt;/p&gt;<br> &lt;p&gt;كلمة &lt;i&gt;bonjour&lt;/i&gt; تعني "مرحباً" بالفرنسية.&lt;/p&gt;
+                        </div>
+                        <div class="functionality">
+                            <strong><span class="tag-name">&lt;em&gt;</span> – Emphasis (تأكيد نبرة)</strong><br> • <strong>الوظيفة</strong>: يُضيف <strong>تأكيدًا لغويًا أو عاطفيًا</strong>.<br> • <strong>تأثير إضافي</strong>:<br> - المتصفحات الصوتية
+                            <strong>تُغيّر نبرة الصوت</strong> (كأنك تقول الكلمة بنبرة خاصة).
+                        </div>
+                        <div class="example">
+                            &lt;p&gt;هل &lt;em&gt;حقًّا&lt;/em&gt; تريد مغادرة الصفحة؟&lt;/p&gt;<br> &lt;p&gt;هذا الحل &lt;em&gt;ليس&lt;/em&gt; مناسبًا للمشكلة.&lt;/p&gt;
+                        </div>
+                        <h3>🆚 المقارنة:</h3>
+                        <table class="comparison-table">
+                            <thead>
+                                <tr>
+                                    <th>المعيار</th>
+                                    <th><span class="tag-cell">&lt;i&gt;</span></th>
+                                    <th><span class="tag-cell">&lt;em&gt;</span></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>المعنى</td>
+                                    <td>بصري أو أدبي</td>
+                                    <td>تأكيد عاطفي/لغوي</td>
+                                </tr>
+                                <tr>
+                                    <td>إمكانية الوصول</td>
+                                    <td>لا يؤثر</td>
+                                    <td>يُحسّن الفهم</td>
+                                </tr>
+                                <tr>
+                                    <td>الاستخدام الشائع</td>
+                                    <td>أسماء أعمال فنية</td>
+                                    <td>نبرة حديث</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="pro-tip">
+                            💡 <strong>تلميح</strong>: إذا كان بإمكانك استبدال الكلمة بـ "بصوت مرتفع" أو "بنبرة خاصة"، فاستخدم <code>&lt;em&gt;</code>.
+                        </div>
+                    </div>
+                    <div class="section">
+                        <h2><span class="tag-name">&lt;u&gt;</span> – تسطير النص (Underline)</h2>
+                        <div class="functionality">
+                            <strong>الوظيفة:</strong> يُسطّر النص من الأسفل.
+                        </div>
+                        <div class="warning">
+                            ⚠️ <strong>تحذير مهم</strong>:<br> • في الماضي، كان التسطير يُستخدم للروابط، لذا <strong>قد يُربك المستخدم</strong> (يظن أن النص رابط).<br> • <strong>لا تستخدمه للروابط</strong> — الروابط تُسطّر تلقائيًا عبر CSS.
+                        </div>
+                        <div class="when-to-use">
+                            <strong>متى يُستخدم بشكل صحيح؟</strong><br> • لتمييز <strong>الأخطاء الإملائية</strong> (مع سمة <code>class="spelling"</code>).<br> • لأسماء <strong>الأشخاص أو الكيانات</strong> في النصوص القانونية (نادر).
+                        </div>
+                        <div class="example">
+                            &lt;p&gt;الكلمة &lt;u class="spelling"&gt;كتابه&lt;/u&gt; مكتوبة بشكل خاطئ.&lt;/p&gt;
+                        </div>
+                        <div class="pro-tip">
+                            ✅ <strong>بديل آمن</strong>: استخدم <code>&lt;mark&gt;</code> أو CSS (<code>text-decoration: underline</code>) مع لون مميز.
+                        </div>
+                    </div>
+                    <div class="section">
+                        <h2><span class="tag-name">&lt;mark&gt;</span> – تمييز النص (Highlight)</h2>
+                        <div class="functionality">
+                            <strong>الوظيفة:</strong> يُميّز النص <strong>كأنك استخدمت قلم تظليل</strong> (مثل نتائج البحث في جوجل).
+                        </div>
+                        <div class="when-to-use">
+                            <strong>الاستخدامات الشائعة:</strong><br> • نتائج البحث.<br> • المعلومات المهمة التي يجب أن ينتبه لها القارئ.
+                        </div>
+                        <div class="example">
+                            &lt;p&gt;تم العثور على كلمة &lt;mark&gt;HTML&lt;/mark&gt; في هذا المستند.&lt;/p&gt;<br> &lt;p&gt;الموعد النهائي هو &lt;mark&gt;15 أبريل 2025&lt;/mark&gt;.&lt;/p&gt;
+                        </div>
+                        <div class="pro-tip">
+                            💡 <strong>تخصيص المظهر</strong>: يمكنك تغيير لون التمييز عبر CSS:<br>
+                            <code>mark { background-color: #ffeb3b; color: #000; }</code>
+                        </div>
+                    </div>
+                    <div class="section">
+                        <h2><span class="tag-name">&lt;small&gt;</span> – نص صغير</h2>
+                        <div class="functionality">
+                            <strong>الوظيفة:</strong> يُصغّر حجم النص <strong>بدلالة معنوية</strong>، لا مجرد تغيير بصري.
+                        </div>
+                        <div class="when-to-use">
+                            <strong>متى تستخدمه؟</strong><br> • الشروط والأحكام.<br> • حقوق الملكية.<br> • التفاصيل الثانوية.
+                        </div>
+                        <div class="example">
+                            &lt;footer&gt;<br> &nbsp;&nbsp;&lt;p&gt;© 2025 موقع التقنية. جميع الحقوق محفوظة.&lt;/p&gt;<br> &nbsp;&nbsp;&lt;small&gt;يُمنع نسخ المحتوى دون إذن كتابي.&lt;/small&gt;<br> &lt;/footer&gt;
+                        </div>
+                        <div class="warning">
+                            ❌ <strong>لا تستخدمه</strong> لجعل أي نص صغير — استخدم CSS (<code>font-size</code>) إذا لم يكن المحتوى ثانويًا.
+                        </div>
+                    </div>
+                    <div class="section">
+                        <h2><span class="tag-name">&lt;del&gt;</span> و<span class="tag-name">&lt;s&gt;</span> – النص المشطوب</h2>
+                        <div class="functionality">
+                            <strong><span class="tag-name">&lt;del&gt;</span> – Deleted Text</strong><br> • <strong>الوظيفة</strong>: يُشير إلى أن النص <strong>تم حذفه من المستند</strong> (لكنه يُعرض للتاريخ).<br> • <strong>يُستخدم غالبًا مع <code>&lt;ins&gt;</code></strong>                            (النص المُدرج).
+                        </div>
+                        <div class="example">
+                            &lt;p&gt;السعر القديم: &lt;del&gt;100 ريال&lt;/del&gt;، السعر الجديد: &lt;ins&gt;75 ريال&lt;/ins&gt;.&lt;/p&gt;
+                        </div>
+                        <div class="functionality">
+                            <strong><span class="tag-name">&lt;s&gt;</span> – Strikethrough (مشطوب بصري)</strong><br> • <strong>الوظيفة</strong>: يُشطِب النص <strong>بدون معنى دلالي</strong> (مثل إلغاء فكرة).
+                        </div>
+                        <div class="example">
+                            &lt;p&gt;سأذهب إلى &lt;s&gt;السينما&lt;/s&gt; المكتبة.&lt;/p&gt;
+                        </div>
+                        <div class="pro-tip">
+                            🆚 <strong>الفرق</strong>:<br> • <code>&lt;del&gt;</code>: <strong>حذف رسمي</strong> (له سياق تحريري).<br> • <code>&lt;s&gt;</code>: <strong>إلغاء غير رسمي</strong> (مثل تصحيح فوري).
+                        </div>
+                    </div>
+                    <div class="section">
+                        <h2><span class="tag-name">&lt;sub&gt;</span> و<span class="tag-name">&lt;sup&gt;</span> – النصوص السفلية والعلوية</h2>
+                        <div class="functionality">
+                            <strong><span class="tag-name">&lt;sub&gt;</span> – Subscript (نص سفلي)</strong><br> • <strong>الاستخدام</strong>: الصيغ الكيميائية، الرموز الرياضية.
+                        </div>
+                        <div class="example">
+                            &lt;p&gt;صيغة الماء هي H&lt;sub&gt;2&lt;/sub&gt;O.&lt;/p&gt;
+                        </div>
+                        <div class="functionality">
+                            <strong><span class="tag-name">&lt;sup&gt;</span> – Superscript (نص علوي)</strong><br> • <strong>الاستخدام</strong>: الأسس الرياضية، الحواشي المرجعية.
+                        </div>
+                        <div class="example">
+                            &lt;p&gt;مساحة المربع = طول&lt;sup&gt;2&lt;/sup&gt;.&lt;/p&gt;<br> &lt;p&gt;هذا اقتباس مهم&lt;sup&gt;[1]&lt;/sup&gt;.&lt;/p&gt;
+                        </div>
+                        <div class="pro-tip">
+                            ✅ <strong>ملاحظة</strong>: هذه الوسوم تحافظ على تدفق النص دون كسر السطر.
+                        </div>
+                    </div>
+                    <div class="section">
+                        <h2>وسوم البرمجة والتقنية</h2>
+                        <table class="comparison-table">
+                            <thead>
+                                <tr>
+                                    <th>الوسم</th>
+                                    <th>الوظيفة</th>
+                                    <th>مثال</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><span class="tag-cell">&lt;code&gt;</span></td>
+                                    <td>لعرض <strong>شفرة برمجية قصيرة</strong></td>
+                                    <td><code>&lt;p&gt;استخدم دالة &lt;code&gt;console.log()&lt;/code&gt;.&lt;/p&gt;</code></td>
+                                </tr>
+                                <tr>
+                                    <td><span class="tag-cell">&lt;pre&gt;</span></td>
+                                    <td>لعرض <strong>نص مُنسّق مسبقًا</strong> (يحافظ على المسافات والسطور)</td>
+                                    <td>انظر المثال أدناه</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="tag-cell">&lt;kbd&gt;</span></td>
+                                    <td>لتمثيل <strong>مفاتيح لوحة المفاتيح</strong></td>
+                                    <td><code>&lt;p&gt;اضغط &lt;kbd&gt;Ctrl&lt;/kbd&gt; + &lt;kbd&gt;C&lt;/kbd&gt;&lt;/p&gt;</code></td>
+                                </tr>
+                                <tr>
+                                    <td><span class="tag-cell">&lt;samp&gt;</span></td>
+                                    <td>لعرض <strong>إخراج برنامج</strong> (مثل Terminal)</td>
+                                    <td><code>&lt;samp&gt;File not found&lt;/samp&gt;</code></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <h3>مثال على <span class="tag-name">&lt;pre&gt;</span> و<span class="tag-name">&lt;code&gt;</span> معًا:</h3>
+                        <div class="example">
+                            &lt;pre&gt;&lt;code&gt;&amp;lt;html&amp;gt;<br> &nbsp;&nbsp;&amp;lt;body&amp;gt;
+                            <br> &nbsp;&nbsp;&nbsp;&nbsp;&amp;lt;h1&amp;gt;مرحباً&amp;lt;/h1&amp;gt;
+                            <br> &nbsp;&nbsp;&amp;lt;/body&amp;gt;
+                            <br> &amp;lt;/html&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+                        </div>
+                        <div class="pro-tip">
+                            💡 <strong>نصيحة</strong>: استخدم <code>&lt;pre&gt;&lt;code&gt;</code> لعرض كتل شفرة كاملة.
+                        </div>
+                    </div>
+                    <div class="section">
+                        <h2>خلاصة الفصل 3: جدول مرجعي سريع</h2>
+                        <table class="summary-table">
+                            <thead>
+                                <tr>
+                                    <th>الوسم</th>
+                                    <th>المعنى</th>
+                                    <th>متى تستخدمه؟</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><span class="tag-cell">&lt;strong&gt;</span></td>
+                                    <td>تأكيد/أهمية</td>
+                                    <td>للنصوص المهمة</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="tag-cell">&lt;em&gt;</span></td>
+                                    <td>نبرة/تأكيد عاطفي</td>
+                                    <td>للكلمات التي تحمل نبرة</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="tag-cell">&lt;mark&gt;</span></td>
+                                    <td>تمييز</td>
+                                    <td>نتائج البحث، معلومات حرجة</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="tag-cell">&lt;small&gt;</span></td>
+                                    <td>محتوى ثانوي</td>
+                                    <td>الشروط، حقوق الملكية</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="tag-cell">&lt;del&gt;</span></td>
+                                    <td>نص محذوف</td>
+                                    <td>مقارنة أسعار، تعديلات</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="tag-cell">&lt;ins&gt;</span></td>
+                                    <td>نص مُدرج</td>
+                                    <td>التعديلات الجديدة</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="tag-cell">&lt;sub&gt;</span> / <span class="tag-cell">&lt;sup&gt;</span></td>
+                                    <td>نص سفلي/علوي</td>
+                                    <td>كيمياء، رياضيات</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="tag-cell">&lt;code&gt;</span></td>
+                                    <td>شفرة برمجية</td>
+                                    <td>أمثلة برمجية قصيرة</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="tag-cell">&lt;pre&gt;</span></td>
+                                    <td>نص مُنسّق</td>
+                                    <td>كتل شفرة متعددة الأسطر</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="pro-tip" style="margin-top: 20px;">
+                            🎯 <strong>تذكّر دائمًا</strong>:<br> التنسيق في HTML ليس عن "كيف يبدو"، بل عن "<strong>ماذا يعني</strong>".<br> كلما زادت دلالية كودك، أصبح موقعك <strong>أكثر وضوحًا</strong> للمستخدمين، المتصفحات، ومحركات البحث.
+                        </div>
+                    </div>
+                    <footer>
+                        <p>تصميم احترافي باستخدام HTML5 وCSS3 الحديث</p>
+                    </footer>
+                </div>
+
+                <!-- Chapter 4 -->
+                <div id="chapter-4" class="chapter">
+                    <div class="chapter-header">
+                        <h1>الفصل 4️⃣: الجداول، القوائم، والنماذج</h1>
+                        <p class="subtitle">دليل شامل للمطور العربي من البداية إلى الاحتراف</p>
+                    </div>
+                    <div class="intro">
+                        <h2>📌 مقدمة: لماذا هذه الوسوم حاسمة؟</h2>
+                        <p>• <strong>القوائم</strong>: لتنظيم العناصر ذات العلاقة (مثل القوائم الجانبية، عناصر التنقل).<br> • <strong>الجداول</strong>: لعرض <strong>البيانات المنظمة</strong> (مثل الأسعار، النتائج، الجداول الزمنية).<br> • <strong>النماذج</strong>:
+                            لتمكين <strong>التفاعل مع المستخدم</strong> (تسجيل الدخول، البحث، إرسال الرسائل).</p>
+
+                        <div class="warning">
+                            ⚠️ <strong>تحذير هام</strong>:<br> لا تستخدم <code>&lt;table&gt;</code> أبدًا لتصميم تخطيط الصفحة (Layout)!<br> هذا كان مقبولًا في التسعينيات، لكنه <strong>ممنوع في HTML5</strong>. استخدم CSS Grid أو Flexbox بدلًا من ذلك.
+                        </div>
+                    </div>
+                    <div class="section">
+                        <h2>الجزء الأول: الجداول (Tables)</h2>
+                        <h3>الهيكل الأساسي الصحيح لجدول HTML5</h3>
+                        <div class="example">
+                            &lt;table&gt;<br> &nbsp;&nbsp;&lt;caption&gt;جدول درجات الطلاب في مادة البرمجة&lt;/caption&gt;<br> &nbsp;&nbsp;&lt;thead&gt;
+                            <br> &nbsp;&nbsp;&nbsp;&nbsp;&lt;tr&gt;
+                            <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;th scope="col"&gt;الاسم&lt;/th&gt;<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;th scope="col"&gt;الدرجة&lt;/th&gt;<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;th scope="col"&gt;الحالة&lt;/th&gt;<br>                            &nbsp;&nbsp;&nbsp;&nbsp;&lt;/tr&gt;
+                            <br> &nbsp;&nbsp;&lt;/thead&gt;
+                            <br> &nbsp;&nbsp;&lt;tbody&gt;
+                            <br> &nbsp;&nbsp;&nbsp;&nbsp;&lt;tr&gt;
+                            <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;td&gt;أحمد محمد&lt;/td&gt;<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;td&gt;92&lt;/td&gt;
+                            <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;td&gt;ناجح&lt;/td&gt;
+                            <br> &nbsp;&nbsp;&nbsp;&nbsp;&lt;/tr&gt;
+                            <br> &nbsp;&nbsp;&nbsp;&nbsp;&lt;tr&gt;
+                            <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;td&gt;فاطمة علي&lt;/td&gt;<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;td&gt;85&lt;/td&gt;
+                            <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;td&gt;ناجح&lt;/td&gt;
+                            <br> &nbsp;&nbsp;&nbsp;&nbsp;&lt;/tr&gt;
+                            <br> &nbsp;&nbsp;&lt;/tbody&gt;
+                            <br> &nbsp;&nbsp;&lt;tfoot&gt;
+                            <br> &nbsp;&nbsp;&nbsp;&nbsp;&lt;tr&gt;
+                            <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;td&gt;المتوسط&lt;/td&gt;
+                            <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;td&gt;88.5&lt;/td&gt;
+                            <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;td&gt;&lt;/td&gt;
+                            <br> &nbsp;&nbsp;&nbsp;&nbsp;&lt;/tr&gt;
+                            <br> &nbsp;&nbsp;&lt;/tfoot&gt;
+                            <br> &lt;/table&gt;
+                        </div>
+                        <h3>شرح كل عنصر:</h3>
+                        <table class="comparison-table">
+                            <thead>
+                                <tr>
+                                    <th>الوسم</th>
+                                    <th>الوظيفة</th>
+                                    <th>التفاصيل</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><span class="tag-cell">&lt;table&gt;</span></td>
+                                    <td>حاوية الجدول ككل</td>
+                                    <td>إلزامي</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="tag-cell">&lt;caption&gt;</span></td>
+                                    <td>عنوان وصفي للجدول</td>
+                                    <td><strong>ضروري</strong> لذوي الاحتياجات الخاصة</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="tag-cell">&lt;thead&gt;</span></td>
+                                    <td>رؤوس الأعمدة</td>
+                                    <td>يُستخدم لتعريف بنية البيانات</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="tag-cell">&lt;tbody&gt;</span></td>
+                                    <td>بيانات الجدول الفعلية</td>
+                                    <td>يُمكن تكراره لتقسيم البيانات</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="tag-cell">&lt;tfoot&gt;</span></td>
+                                    <td>تذييل الجدول</td>
+                                    <td>يُوضع بعد <code>&lt;thead&gt;</code> حتى لو يظهر في الأسفل</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="tag-cell">&lt;tr&gt;</span></td>
+                                    <td>صف (Table Row)</td>
+                                    <td>يحتوي على خلايا</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="tag-cell">&lt;th&gt;</span></td>
+                                    <td>خلية رأس (Table Header)</td>
+                                    <td><strong>عريض افتراضيًا</strong>، ويُفضل استخدام <code>scope</code></td>
+                                </tr>
+                                <tr>
+                                    <td><span class="tag-cell">&lt;td&gt;</span></td>
+                                    <td>خلية بيانات (Table Data)</td>
+                                    <td>للمحتوى العادي</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <h3>سمة <code>scope</code> — سر الاحتراف في الجداول</h3>
+                        <p>تُستخدم مع <code>&lt;th&gt;</code> لربط الخلية بالصف أو العمود، مما يحسّن <strong>إمكانية الوصول</strong> (Accessibility):</p>
+                        <ul style="margin: 15px 0 20px 20px; direction: rtl;">
+                            <li><code>scope="col"</code>: هذه الخلية رأس <strong>عمود</strong>.</li>
+                            <li><code>scope="row"</code>: هذه الخلية رأس <strong>صف</strong>.</li>
+                        </ul>
+                        <div class="example">
+                            &lt;tr&gt;<br> &nbsp;&nbsp;&lt;th scope="row"&gt;الإجمالي&lt;/th&gt;<br> &nbsp;&nbsp;&lt;td&gt;100&lt;/td&gt;
+                            <br> &nbsp;&nbsp;&lt;td&gt;200&lt;/td&gt;
+                            <br> &lt;/tr&gt;
+                        </div>
+                        <div class="pro-tip">
+                            ✅ <strong>لماذا هذا مهم؟</strong><br> قارئات الشاشة تستخدم <code>scope</code> لوصف الخلية للمستخدم الكفيف:<br> "الإجمالي، القيمة: 100".
+                        </div>
+                        <h3>أنواع الجداول المتقدمة</h3>
+                        <p><strong>1. جدول مع خلايا مدمجة (Merged Cells)</strong><br> • <code>colspan</code>: لدمج خلايا <strong>أفقيًا</strong>.<br> • <code>rowspan</code>: لدمج خلايا <strong>رأسيًا</strong>.</p>
+                        <div class="example">
+                            &lt;table&gt;<br> &nbsp;&nbsp;&lt;tr&gt;
+                            <br> &nbsp;&nbsp;&nbsp;&nbsp;&lt;th&gt;القسم&lt;/th&gt;
+                            <br> &nbsp;&nbsp;&nbsp;&nbsp;&lt;th colspan="2"&gt;النتائج&lt;/th&gt;<br> &nbsp;&nbsp;&lt;/tr&gt;
+                            <br> &nbsp;&nbsp;&lt;tr&gt;
+                            <br> &nbsp;&nbsp;&nbsp;&nbsp;&lt;td&gt;الرياضيات&lt;/td&gt;
+                            <br> &nbsp;&nbsp;&nbsp;&nbsp;&lt;td&gt;85&lt;/td&gt;
+                            <br> &nbsp;&nbsp;&nbsp;&nbsp;&lt;td&gt;90&lt;/td&gt;
+                            <br> &nbsp;&nbsp;&lt;/tr&gt;
+                            <br> &lt;/table&gt;
+                        </div>
+                        <p><strong>2. جدول مع بيانات مجمّعة (Grouped Data)</strong><br> استخدم <code>&lt;tbody&gt;</code> متعددة لتقسيم البيانات:</p>
+                        <div class="example">
+                            &lt;tbody&gt;<br> &nbsp;&nbsp;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;strong&gt;الطلاب الناجحون&lt;/strong&gt;&lt;/td&gt;&lt;/tr&gt;<br> &nbsp;&nbsp;&lt;tr&gt;&lt;td&gt;أحمد&lt;/td&gt;&lt;td&gt;90&lt;/td&gt;&lt;td&gt;ناجح&lt;/td&gt;&lt;/tr&gt;
+                            <br> &lt;/tbody&gt;
+                            <br> &lt;tbody&gt;
+                            <br> &nbsp;&nbsp;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;strong&gt;الطلاب الراسبون&lt;/strong&gt;&lt;/td&gt;&lt;/tr&gt;<br> &nbsp;&nbsp;&lt;tr&gt;&lt;td&gt;خالد&lt;/td&gt;&lt;td&gt;45&lt;/td&gt;&lt;td&gt;راسب&lt;/td&gt;&lt;/tr&gt;
+                            <br> &lt;/tbody&gt;
+                        </div>
+                        <h3>❌ أخطاء شائعة في الجداول:</h3>
+                        <ol style="margin: 15px 0 20px 20px; direction: rtl;">
+                            <li>نسيان <code>&lt;caption&gt;</code> → يُضعف إمكانية الوصول.</li>
+                            <li>استخدام <code>&lt;table&gt;</code> للتصميم (مثل تخطيط الصفحة).</li>
+                            <li>عدم استخدام <code>&lt;thead&gt;</code>/<code>&lt;tbody&gt;</code> → يجعل الجدول غير منظم.</li>
+                            <li>إهمال <code>scope</code> في <code>&lt;th&gt;</code>.</li>
+                        </ol>
+                    </div>
+                    <div class="section">
+                        <h2>الجزء الثاني: القوائم (Lists)</h2>
+                        <p>هناك نوعان رئيسيان من القوائم في HTML:</p>
+                        <h3>1. القائمة غير المرتبة <span class="tag-name">&lt;ul&gt;</span></h3>
+                        <p>تُستخدم عندما <strong>لا يكون للعناصر ترتيب منطقي</strong>.</p>
+                        <div class="example">
+                            &lt;ul&gt;<br> &nbsp;&nbsp;&lt;li&gt;تفاح&lt;/li&gt;
+                            <br> &nbsp;&nbsp;&lt;li&gt;موز&lt;/li&gt;
+                            <br> &nbsp;&nbsp;&lt;li&gt;برتقال&lt;/li&gt;
+                            <br> &lt;/ul&gt;
+                        </div>
+                        <div class="pro-tip">
+                            💡 <strong>نصيحة تصميم</strong>: يمكنك تغيير رمز القائمة عبر CSS (<code>list-style-type: square</code>, <code>circle</code>, إلخ).
+                        </div>
+                        <h3>2. القائمة المرتبة <span class="tag-name">&lt;ol&gt;</span></h3>
+                        <p>تُستخدم عندما <strong>يوجد تسلسل منطقي أو زمني</strong>.</p>
+                        <div class="example">
+                            &lt;ol&gt;<br> &nbsp;&nbsp;&lt;li&gt;افتح المتصفح&lt;/li&gt;<br> &nbsp;&nbsp;&lt;li&gt;اكتب عنوان الموقع&lt;/li&gt;<br> &nbsp;&nbsp;&lt;li&gt;اضغط Enter&lt;/li&gt;<br> &lt;/ol&gt;
+                        </div>
+                        <p><strong>خصائص متقدمة:</strong><br> • <code>start</code>: لبدء العد من رقم معين.<br> • <code>reversed</code>: لعكس الترتيب (من الأكبر إلى الأصغر).<br> • <code>type</code>: لتغيير نوع العلامة (<code>1</code>, <code>A</code>, <code>a</code>,
+                            <code>I</code>, <code>i</code>).</p>
+                        <div class="example">
+                            &lt;!-- تبدأ من 5 --&gt;<br> &lt;ol start="5"&gt;<br> &nbsp;&nbsp;&lt;li&gt;العنصر الخامس&lt;/li&gt;<br> &lt;/ol&gt;
+                            <br><br> &lt;!-- تعداد بأحرف كبيرة --&gt;<br> &lt;ol type="A"&gt;<br> &nbsp;&nbsp;&lt;li&gt;أول عنصر&lt;/li&gt;<br> &nbsp;&nbsp;&lt;li&gt;ثاني عنصر&lt;/li&gt;<br> &lt;/ol&gt;
+                        </div>
+                        <h3>3. القوائم المتداخلة (Nested Lists)</h3>
+                        <p>يمكنك وضع قائمة داخل عنصر <code>&lt;li&gt;</code>:</p>
+                        <div class="example">
+                            &lt;ul&gt;<br> &nbsp;&nbsp;&lt;li&gt;فاكهة
+                            <br> &nbsp;&nbsp;&nbsp;&nbsp;&lt;ul&gt;
+                            <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;li&gt;تفاح&lt;/li&gt;
+                            <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;li&gt;موز&lt;/li&gt;
+                            <br> &nbsp;&nbsp;&nbsp;&nbsp;&lt;/ul&gt;
+                            <br> &nbsp;&nbsp;&lt;/li&gt;
+                            <br> &nbsp;&nbsp;&lt;li&gt;خضروات
+                            <br> &nbsp;&nbsp;&nbsp;&nbsp;&lt;ul&gt;
+                            <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;li&gt;خيار&lt;/li&gt;
+                            <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;li&gt;طماطم&lt;/li&gt;
+                            <br> &nbsp;&nbsp;&nbsp;&nbsp;&lt;/ul&gt;
+                            <br> &nbsp;&nbsp;&lt;/li&gt;
+                            <br> &lt;/ul&gt;
+                        </div>
+                        <div class="pro-tip">
+                            ✅ <strong>أفضل ممارسة</strong>: لا تتعمق أكثر من 3 مستويات — قد يُربك المستخدم.
+                        </div>
+                        <h3>4. قائمة التعريف <span class="tag-name">&lt;dl&gt;</span> (Definition List)</h3>
+                        <p>لعرض <strong>مصطلحات ومعانيها</strong> (نادرة لكن مفيدة).</p>
+                        <div class="example">
+                            &lt;dl&gt;<br> &nbsp;&nbsp;&lt;dt&gt;HTML&lt;/dt&gt;
+                            <br> &nbsp;&nbsp;&lt;dd&gt;لغة توصيف النص التشعبي.&lt;/dd&gt;<br> &nbsp;&nbsp;
+                            <br> &nbsp;&nbsp;&lt;dt&gt;CSS&lt;/dt&gt;
+                            <br> &nbsp;&nbsp;&lt;dd&gt;لغة تنسيق صفحات الويب.&lt;/dd&gt;<br> &lt;/dl&gt;
+                        </div>
+                        <p>• <code>&lt;dt&gt;</code>: المصطلح (Definition Term).<br> • <code>&lt;dd&gt;</code>: الوصف (Definition Description).</p>
+                    </div>
+                    <div class="section">
+                        <h2>الجزء الثالث: النماذج (Forms) — قلب التفاعل</h2>
+                        <p>النماذج هي الطريقة الوحيدة لجمع <strong>مدخلات المستخدم</strong> في صفحة ويب ثابتة.</p>
+                        <h3>الهيكل الأساسي للنموذج</h3>
+                        <div class="example">
+                            &lt;form action="/submit" method="POST"&gt;<br> &nbsp;&nbsp;&lt;label for="name"&gt;الاسم الكامل:&lt;/label&gt;<br> &nbsp;&nbsp;&lt;input type="text" id="name" name="name" required&gt;<br><br> &nbsp;&nbsp;&lt;label for="email"&gt;البريد
+                            الإلكتروني:&lt;/label&gt;
+                            <br> &nbsp;&nbsp;&lt;input type="email" id="email" name="email" required&gt;<br><br> &nbsp;&nbsp;&lt;button type="submit"&gt;إرسال&lt;/button&gt;<br> &lt;/form&gt;
+                        </div>
+                        <h3>شرح العناصر الأساسية:</h3>
+                        <table class="comparison-table">
+                            <thead>
+                                <tr>
+                                    <th>العنصر</th>
+                                    <th>الوظيفة</th>
+                                    <th>التفاصيل</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><span class="tag-cell">&lt;form&gt;</span></td>
+                                    <td>حاوية النموذج</td>
+                                    <td><code>action</code>: أين تُرسل البيانات، <code>method</code>: POST أو GET</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="tag-cell">&lt;label&gt;</span></td>
+                                    <td>تسمية توضيحية</td>
+                                    <td><strong>ضروري</strong> لتحسين إمكانية الوصول</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="tag-cell">&lt;input&gt;</span></td>
+                                    <td>حقل إدخال</td>
+                                    <td>يختلف حسب <code>type</code></td>
+                                </tr>
+                                <tr>
+                                    <td><span class="tag-cell">&lt;button&gt;</span></td>
+                                    <td>زر الإرسال</td>
+                                    <td><code>type="submit"</code> لإرسال النموذج</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <h3>أهم أنواع <span class="tag-name">&lt;input&gt;</span> مع أمثلة:</h3>
+                        <table class="comparison-table">
+                            <thead>
+                                <tr>
+                                    <th>النوع</th>
+                                    <th>المثال</th>
+                                    <th>الملاحظات</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>text</code></td>
+                                    <td><code>&lt;input type="text" placeholder="أدخل الاسم"&gt;</code></td>
+                                    <td>نص عام</td>
+                                </tr>
+                                <tr>
+                                    <td><code>email</code></td>
+                                    <td><code>&lt;input type="email"&gt;</code></td>
+                                    <td>يتحقق من صحة البريد تلقائيًا</td>
+                                </tr>
+                                <tr>
+                                    <td><code>password</code></td>
+                                    <td><code>&lt;input type="password"&gt;</code></td>
+                                    <td>يخفي النص</td>
+                                </tr>
+                                <tr>
+                                    <td><code>number</code></td>
+                                    <td><code>&lt;input type="number" min="0" max="100"&gt;</code></td>
+                                    <td>يسمح بالأرقام فقط</td>
+                                </tr>
+                                <tr>
+                                    <td><code>date</code></td>
+                                    <td><code>&lt;input type="date"&gt;</code></td>
+                                    <td>يعرض تقويمًا</td>
+                                </tr>
+                                <tr>
+                                    <td><code>checkbox</code></td>
+                                    <td><code>&lt;input type="checkbox" name="topics" value="html"&gt; HTML</code></td>
+                                    <td>خيارات متعددة</td>
+                                </tr>
+                                <tr>
+                                    <td><code>radio</code></td>
+                                    <td><code>&lt;input type="radio" name="gender" value="male"&gt; ذكر</code></td>
+                                    <td>خيار واحد من مجموعة</td>
+                                </tr>
+                                <tr>
+                                    <td><code>file</code></td>
+                                    <td><code>&lt;input type="file" accept="image/*"&gt;</code></td>
+                                    <td>لرفع ملفات</td>
+                                </tr>
+                                <tr>
+                                    <td><code>textarea</code></td>
+                                    <td><code>&lt;textarea rows="4"&gt;اكتب تعليقك...&lt;/textarea&gt;</code></td>
+                                    <td>نص طويل</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="pro-tip">
+                            ✅ <strong>تلميح احترافي</strong>:<br> استخدم دائمًا <code>name</code> في <code>&lt;input&gt;</code> — بدونه، لن تُرسل القيمة إلى الخادم.
+                        </div>
+                        <h3>ربط <span class="tag-name">&lt;label&gt;</span> بحقل الإدخال</h3>
+                        <p>هناك طريقتان:</p>
+                        <p><strong>1. باستخدام <code>for</code> و<code>id</code></strong> (الأفضل):</p>
+                        <div class="example">
+                            &lt;label for="email"&gt;البريد:&lt;/label&gt;<br> &lt;input type="email" id="email" name="email"&gt;
+                        </div>
+                        <p><strong>2. بالتضمين</strong>:</p>
+                        <div class="example">
+                            &lt;label&gt;<br> &nbsp;&nbsp;البريد:
+                            <br> &nbsp;&nbsp;&lt;input type="email" name="email"&gt;<br> &lt;/label&gt;
+                        </div>
+                        <div class="pro-tip">
+                            ✅ <strong>لماذا هذا مهم؟</strong><br> عند النقر على التسمية، يركّز المؤشر تلقائيًا في الحقل — تجربة مستخدم أفضل!
+                        </div>
+                        <h3>التحقق من الصحة (Validation)</h3>
+                        <p>HTML5 يدعم <strong>تحققًا داخليًا</strong> دون JavaScript:</p>
+                        <ul style="margin: 15px 0 20px 20px; direction: rtl;">
+                            <li><code>required</code>: الحقل إلزامي.</li>
+                            <li><code>minlength</code> / <code>maxlength</code>: طول النص.</li>
+                            <li><code>pattern</code>: تحقق عبر تعبير منتظم (Regex).</li>
+                        </ul>
+                        <div class="example">
+                            &lt;input type="text"<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name="username"
+                            <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;required
+                            <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;minlength="3"
+                            <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pattern="[A-Za-z0-9]+"
+                            <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;title="يجب أن يحتوي على أحرف وأرقام فقط"&gt;
+                        </div>
+                        <h3>مجموعات الخيارات: <span class="tag-name">&lt;select&gt;</span> و<span class="tag-name">&lt;optgroup&gt;</span></h3>
+                        <div class="example">
+                            &lt;label for="country"&gt;الدولة:&lt;/label&gt;<br> &lt;select id="country" name="country" required&gt;<br> &nbsp;&nbsp;&lt;optgroup label="الدول العربية"&gt;<br> &nbsp;&nbsp;&nbsp;&nbsp;&lt;option value="sa"&gt;السعودية&lt;/option&gt;<br>                            &nbsp;&nbsp;&nbsp;&nbsp;&lt;option value="eg"&gt;مصر&lt;/option&gt;<br> &nbsp;&nbsp;&lt;/optgroup&gt;
+                            <br> &nbsp;&nbsp;&lt;optgroup label="أوروبا"&gt;<br> &nbsp;&nbsp;&nbsp;&nbsp;&lt;option value="fr"&gt;فرنسا&lt;/option&gt;<br> &nbsp;&nbsp;&nbsp;&nbsp;&lt;option value="de"&gt;ألمانيا&lt;/option&gt;<br> &nbsp;&nbsp;&lt;/optgroup&gt;
+                            <br> &lt;/select&gt;
+                        </div>
+                    </div>
+                    <div class="section">
+                        <h2>خلاصة الفصل 4: جدول مرجعي سريع</h2>
+                        <table class="summary-table">
+                            <thead>
+                                <tr>
+                                    <th>الفئة</th>
+                                    <th>الوسم</th>
+                                    <th>الاستخدام الأمثل</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>الجداول</strong></td>
+                                    <td><span class="tag-cell">&lt;table&gt;</span>, <span class="tag-cell">&lt;thead&gt;</span>, <span class="tag-cell">&lt;tbody&gt;</span>, <span class="tag-cell">&lt;th scope&gt;</span></td>
+                                    <td>عرض البيانات المنظمة فقط</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>القوائم</strong></td>
+                                    <td><span class="tag-cell">&lt;ul&gt;</span>, <span class="tag-cell">&lt;ol&gt;</span>, <span class="tag-cell">&lt;dl&gt;</span></td>
+                                    <td>تنظيم العناصر ذات العلاقة</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>النماذج</strong></td>
+                                    <td><span class="tag-cell">&lt;form&gt;</span>, <span class="tag-cell">&lt;label&gt;</span>, <span class="tag-cell">&lt;input&gt;</span>, <span class="tag-cell">&lt;button&gt;</span></td>
+                                    <td>جمع مدخلات المستخدم</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="pro-tip" style="margin-top: 20px;">
+                            🎯 <strong>تذكّر دائمًا</strong>:<br> • الجداول = <strong>بيانات</strong>، وليس تصميم.<br> • القوائم = <strong>تنظيم منطقي</strong>.<br> • النماذج = <strong>تفاعل آمن وسهل</strong>.<br> احترام هذه المبادئ يجعل موقعك <strong>أفضل في SEO، إمكانية الوصول، وتجربة المستخدم</strong>.
+                        </div>
+                    </div>
+                    <footer>
+                        <p>تصميم احترافي باستخدام HTML5 وCSS3 الحديث</p>
+                    </footer>
+                </div>
+
+                <!-- Chapter 5 -->
+                <div id="chapter-5" class="chapter">
+                    <div class="chapter-header">
+                        <h1>الفصل 5️⃣: وسوم الميديا (Media Elements)</h1>
+                        <p class="subtitle">دليل شامل لدمج الصور، الصوت، والفيديو في صفحات الويب الحديثة</p>
+                    </div>
+                    <div class="intro">
+                        <h2>📌 مقدمة: لماذا تغيّر HTML5 عالم الميديا؟</h2>
+                        <p>قبل HTML5، كان عرض الفيديو أو الصوت يتطلب <strong>إضافات خارجية</strong> مثل Flash — مما كان يُبطئ المواقع، ويُضعف الأمان، ولا يعمل على الجوال.<br> اليوم، تُوفّر HTML5 وسومًا أصلية (Native) تدعم الميديا <strong>بدون إضافات</strong>،
+                            مع تحكم كامل، دعم للترجمات، وتحسين للأداء.</p>
+
+                        <div class="pro-tip">
+                            ✅ <strong>المبدأ الذهبي للميديا في الويب الحديث</strong>:<br> • <strong>الأداء أولًا</strong>: لا تُحمّل ملفات أكبر من اللازم.<br> • <strong>الوصول للجميع</strong>: قدّم بديلاً نصيًّا دائمًا.<br> • <strong>المرونة</strong>:
+                            ادعم أجهزة مختلفة (هاتف، تابلت، حاسوب).
+                        </div>
+                    </div>
+                    <div class="section">
+                        <h2>الجزء الأول: الصور — من <span class="tag-name">&lt;img&gt;</span> إلى <span class="tag-name">&lt;picture&gt;</span></h2>
+                        <h3>1. <span class="tag-name">&lt;img&gt;</span> — الوسم الأساسي للصور</h3>
+                        <h4>الهيكل الإلزامي:</h4>
+                        <div class="example">
+                            &lt;img src="images/logo.png"<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;alt="شعار شركة التقنية"<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;width="200"
+                            <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;height="100"&gt;
+                        </div>
+                        <h4>السمات الأساسية:</h4>
+                        <table class="comparison-table">
+                            <thead>
+                                <tr>
+                                    <th>السمة</th>
+                                    <th>الوظيفة</th>
+                                    <th>لماذا هي ضرورية؟</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>src</code></td>
+                                    <td>مسار الصورة</td>
+                                    <td>بدونها، لا تظهر الصورة</td>
+                                </tr>
+                                <tr>
+                                    <td><code>alt</code></td>
+                                    <td>وصف نصي بديل</td>
+                                    <td><strong>إلزامي</strong> لذوي الاحتياجات الخاصة ولتحسين SEO</td>
+                                </tr>
+                                <tr>
+                                    <td><code>width</code> / <code>height</code></td>
+                                    <td>الأبعاد</td>
+                                    <td>يمنع "الارتداد البصري" (Layout Shift) أثناء التحميل</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="warning">
+                            ⚠️ <strong>تحذير</strong>:<br> لا تستخدم <code>alt=""</code> إلا إذا كانت الصورة <strong>زخرفية تمامًا</strong> (مثل خلفية).<br> مثال جيد: <code>&lt;img src="decoration.png" alt=""&gt;</code>
+                        </div>
+                        <h3>2. <span class="tag-name">&lt;figure&gt;</span> و<span class="tag-name">&lt;figcaption&gt;</span> — لعرض الصور مع تسمية توضيحية</h3>
+                        <p><strong>لماذا نستخدمها؟</strong><br> لربط الصورة <strong>وصفها بشكل دلالي</strong> — وليس مجرد نص تحتها.</p>
+                        <div class="example">
+                            &lt;figure&gt;<br> &nbsp;&nbsp;&lt;img src="chart-2025.jpg" alt="مخطط يوضح نمو مبيعات 2025"&gt;<br> &nbsp;&nbsp;&lt;figcaption&gt;الشكل 1: نمو المبيعات خلال الربع الأول من 2025.&lt;/figcaption&gt;<br> &lt;/figure&gt;
+                        </div>
+                        <div class="pro-tip">
+                            ✅ <strong>فوائد دلالية</strong>:<br> • قارئات الشاشة تقرأ التسمية كجزء من الصورة.<br> • محركات البحث تفهم العلاقة بين الصورة والنص.
+                        </div>
+                        <h3>3. <span class="tag-name">&lt;picture&gt;</span> — الصور التكيفية (Responsive Images)</h3>
+                        <p><strong>المشكلة التي يحلها</strong>:<br> تريد تحميل <strong>صورة صغيرة على الجوال</strong>، و<strong>صورة كبيرة على الحاسوب</strong> — لتوفير البيانات وتحسين السرعة.</p>
+                        <div class="example">
+                            &lt;picture&gt;<br> &nbsp;&nbsp;&lt;source media="(max-width: 600px)" srcset="small.jpg"&gt;<br> &nbsp;&nbsp;&lt;source media="(max-width: 1200px)" srcset="medium.jpg"&gt;<br> &nbsp;&nbsp;&lt;img src="large.jpg" alt="وصف الصورة"&gt;<br>                            &lt;/picture&gt;
+                        </div>
+                        <p><strong>كيف يعمل؟</strong><br> • المتصفح يختار أول <code>&lt;source&gt;</code> يطابق شرط <code>media</code>.<br> • إذا لم يطابق أي شرط، يُستخدم <code>&lt;img&gt;</code> كخيار افتراضي.</p>
+                        <div class="pro-tip">
+                            💡 <strong>نصيحة أداء</strong>:<br> استخدم أدوات مثل <strong>Cloudinary</strong> أو <strong>Imgix</strong> لتوليد أحجام متعددة تلقائيًا.
+                        </div>
+                        <h3>4. سمة <code>srcset</code> — بديل أبسط لـ <span class="tag-name">&lt;picture&gt;</span></h3>
+                        <p>إذا كنت تغيّر <strong>الدقة فقط</strong> (وليس التصميم)، استخدم <code>srcset</code> داخل <code>&lt;img&gt;</code>:</p>
+                        <div class="example">
+                            &lt;img src="default.jpg"<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;srcset="small.jpg 480w, medium.jpg 768w, large.jpg 1200w"<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sizes="(max-width: 600px) 480px, (max-width: 1200px) 768px, 1200px"<br>                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;alt="وصف الصورة"&gt;
+                        </div>
+                        <p>• <code>480w</code>: عرض الصورة بالبكسل.<br> • <code>sizes</code>: يخبر المتصفح <strong>ما العرض المتوقع</strong> على الشاشة.</p>
+                    </div>
+                    <div class="section">
+                        <h2>الجزء الثاني: الفيديو — <span class="tag-name">&lt;video&gt;</span></h2>
+                        <h3>الهيكل الأساسي مع دعم متعدد الصيغ</h3>
+                        <div class="example">
+                            &lt;video controls width="800" height="450" preload="metadata"&gt;<br> &nbsp;&nbsp;&lt;source src="movie.mp4" type="video/mp4"&gt;<br> &nbsp;&nbsp;&lt;source src="movie.webm" type="video/webm"&gt;<br> &nbsp;&nbsp;&lt;track
+                            kind="subtitles" src="ar.vtt" srclang="ar" label="العربية"&gt;<br> &nbsp;&nbsp;متصفحك لا يدعم تشغيل الفيديو.<br> &lt;/video&gt;
+                        </div>
+                        <h3>شرح السمات والعناصر:</h3>
+                        <table class="comparison-table">
+                            <thead>
+                                <tr>
+                                    <th>العنصر/السمة</th>
+                                    <th>الوظيفة</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>controls</code></td>
+                                    <td>يعرض أزرار التشغيل، الصوت، التمرير</td>
+                                </tr>
+                                <tr>
+                                    <td><code>width</code> / <code>height</code></td>
+                                    <td>يحافظ على نسبة العرض (يمنع الارتداد)</td>
+                                </tr>
+                                <tr>
+                                    <td><code>preload</code></td>
+                                    <td><code>none</code> / <code>metadata</code> / <code>auto</code> — يتحكم في التحميل المبدئي</td>
+                                </tr>
+                                <tr>
+                                    <td><code>&lt;source&gt;</code></td>
+                                    <td>يوفّر صيغًا بديلة (MP4 لمعظم المتصفحات، WebM لدعم أفضل)</td>
+                                </tr>
+                                <tr>
+                                    <td><code>&lt;track&gt;</code></td>
+                                    <td>للترجمات أو التسميات التوضيحية</td>
+                                </tr>
+                                <tr>
+                                    <td>النص البديل</td>
+                                    <td>يظهر إذا لم يدعم المتصفح الفيديو</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <h3>دعم الترجمات (Subtitles) عبر <span class="tag-name">&lt;track&gt;</span></h3>
+                        <p><strong>ملف الترجمة (يجب أن يكون بصيغة <code>.vtt</code>)</strong>:</p>
+                        <div class="example">
+                            WEBVTT<br><br> 1
+
+                            <br> 00:00:01.000 --> 00:00:04.000<br> مرحباً بكم في درس اليوم عن HTML5.<br><br> 2
+
+                            <br> 00:00:05.000 --> 00:00:08.000<br> سنتعلم كيف ندمج الفيديو في صفحات الويب.
+                        </div>
+                        <p><strong>ربطه بالفيديو</strong>:</p>
+                        <div class="example">
+                            &lt;track kind="subtitles"<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;src="subtitles-ar.vtt"
+                            <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;srclang="ar"
+                            <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;label="العربية"
+                            <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;default&gt;
+                        </div>
+                        <p>• <code>srclang</code>: رمز اللغة (ar = عربي).<br> • <code>default</code>: يجعل الترجمة نشطة افتراضيًا.</p>
+                        <div class="pro-tip">
+                            ✅ <strong>لماذا هذا مهم؟</strong><br> • يُحسّن إمكانية الوصول لضعاف السمع.<br> • يزيد من وقت بقاء الزائر (Engagement).<br> • يحسّن SEO (جوجل يفهرس نصوص الترجمة).
+                        </div>
+                    </div>
+                    <div class="section">
+                        <h2>الجزء الثالث: الصوت — <span class="tag-name">&lt;audio&gt;</span></h2>
+                        <h3>الهيكل الأساسي:</h3>
+                        <div class="example">
+                            &lt;audio controls&gt;<br> &nbsp;&nbsp;&lt;source src="podcast.mp3" type="audio/mpeg"&gt;<br> &nbsp;&nbsp;&lt;source src="podcast.ogg" type="audio/ogg"&gt;<br> &nbsp;&nbsp;متصفحك لا يدعم تشغيل الصوت.<br> &lt;/audio&gt;
+                        </div>
+                        <h3>السمات المهمة:</h3>
+                        <ul style="margin: 15px 0 20px 20px; direction: rtl;">
+                            <li><code>controls</code>: أزرار التشغيل.</li>
+                            <li><code>autoplay</code>: <strong>ممنوع في معظم المتصفحات الحديثة</strong> (يُعتبر مزعجًا).</li>
+                            <li><code>loop</code>: لتكرار الصوت.</li>
+                            <li><code>muted</code>: لبدء الصوت بدون صوت (مفيد للفيديو التلقائي).</li>
+                        </ul>
+                        <div class="warning">
+                            ⚠️ <strong>تحذير أمان</strong>:<br> لا تستخدم <code>autoplay</code> إلا مع <code>muted</code> — وإلا فلن يعمل في Chrome, Firefox, Safari.
+                        </div>
+                    </div>
+                    <div class="section">
+                        <h2>الجزء الرابع: وسوم متقدمة أخرى</h2>
+                        <h3>1. <span class="tag-name">&lt;iframe&gt;</span> — لإدراج محتوى خارجي (مثل يوتيوب)</h3>
+                        <div class="example">
+                            &lt;iframe width="560" height="315"<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+                            <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;title="فيديو يوتيوب"<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;frameborder="0"
+                            <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;allowfullscreen&gt;
+                            <br> &lt;/iframe&gt;
+                        </div>
+                        <div class="pro-tip">
+                            ✅ <strong>نصيحة</strong>: استخدم دائمًا <code>title</code> لتحسين إمكانية الوصول.
+                        </div>
+                        <h3>2. <span class="tag-name">&lt;map&gt;</span> و<span class="tag-name">&lt;area&gt;</span> — صور تفاعلية (Image Maps)</h3>
+                        <p>نادر الاستخدام، لكن مفيد لخرائط النقر:</p>
+                        <div class="example">
+                            &lt;img src="world-map.jpg" usemap="#worldmap" alt="خريطة العالم"&gt;<br> &lt;map name="worldmap"&gt;<br> &nbsp;&nbsp;&lt;area shape="rect" coords="0,0,100,100" href="/saudi-arabia" alt="السعودية"&gt;<br> &nbsp;&nbsp;&lt;area
+                            shape="circle" coords="200,200,50" href="/egypt" alt="مصر"&gt;<br> &lt;/map&gt;
+                        </div>
+                    </div>
+                    <div class="section">
+                        <h2>خلاصة الفصل 5: جدول مرجعي سريع</h2>
+                        <table class="summary-table">
+                            <thead>
+                                <tr>
+                                    <th>الوسم</th>
+                                    <th>الاستخدام</th>
+                                    <th>أفضل ممارسة</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><span class="tag-cell">&lt;img&gt;</span></td>
+                                    <td>صورة بسيطة</td>
+                                    <td>استخدم <code>alt</code> و<code>width/height</code></td>
+                                </tr>
+                                <tr>
+                                    <td><span class="tag-cell">&lt;picture&gt;</span></td>
+                                    <td>صور تكيفية</td>
+                                    <td>لتحسين الأداء على الجوال</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="tag-cell">&lt;figure&gt;</span> + <span class="tag-cell">&lt;figcaption&gt;</span></td>
+                                    <td>صورة مع وصف</td>
+                                    <td>لتحسين الدلالة وإمكانية الوصول</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="tag-cell">&lt;video&gt;</span></td>
+                                    <td>فيديو</td>
+                                    <td>قدّم أكثر من صيغة + ترجمات</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="tag-cell">&lt;audio&gt;</span></td>
+                                    <td>صوت</td>
+                                    <td>تجنب <code>autoplay</code> بدون <code>muted</code></td>
+                                </tr>
+                                <tr>
+                                    <td><span class="tag-cell">&lt;track&gt;</span></td>
+                                    <td>ترجمات</td>
+                                    <td>استخدم ملفات <code>.vtt</code></td>
+                                </tr>
+                                <tr>
+                                    <td><span class="tag-cell">&lt;iframe&gt;</span></td>
+                                    <td>محتوى خارجي</td>
+                                    <td>أضف <code>title</code> وقيّد الأذونات</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="pro-tip" style="margin-top: 20px;">
+                            🎯 <strong>تذكّر دائمًا</strong>:<br> • <strong>لا تُحمّل ملفات ميديا ثقيلة</strong> دون تحسين.<br> • <strong>قدّم بديلاً نصيًّا</strong> لكل عنصر ميديا.<br> • <strong>اختبر على أجهزة مختلفة</strong> — الجوال ليس الحاسوب!<br><br>                            الميديا الجيدة تجعل موقعك <strong>حيويًا، جذابًا، وشاملًا للجميع</strong>.
+                        </div>
+                    </div>
+                    <footer>
+                        <p>تصميم احترافي باستخدام HTML5 وCSS3 الحديث</p>
+                    </footer>
+                </div>
+
+                <!-- Chapter 6 -->
+                <div id="chapter-6" class="chapter">
+                    <div class="chapter-header">
+                        <h1>الفصل 6️⃣: وسوم التخطيط والبنية (Layout & Structure)</h1>
+                        <p class="subtitle">دليل المطور العربي لبناء صفحات ويب ذكية ومنطقية</p>
+                    </div>
+                    <div class="intro">
+                        <h2>📌 مقدمة: ما المقصود بـ "HTML الدلالي" (Semantic HTML)؟</h2>
+                        <p>في الماضي، كان المطورون يستخدمون <code>&lt;div&gt;</code> لكل شيء:<br>
+                            <code>&lt;div id="header"&gt;...&lt;/div&gt;</code><br>
+                            <code>&lt;div id="nav"&gt;...&lt;/div&gt;</code><br>
+                            <code>&lt;div id="content"&gt;...&lt;/div&gt;</code></p>
+
+                        <p>لكن هذا النهج <strong>يفتقر إلى المعنى</strong>.<br> اليوم، يقدّم HTML5 وسومًا <strong>تحمل دلالة واضحة</strong> تُخبر المتصفح، محركات البحث، وتقنيات الوصول <strong>بطبيعة كل جزء</strong> من الصفحة.</p>
+
+                        <div class="pro-tip">
+                            ✅ <strong>الفرق الجوهري</strong>:<br> • <code>&lt;div&gt;</code>: حاوية <strong>فنية</strong> (لا معنى لها).<br> • <code>&lt;header&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;main&gt;</code>: حاويات <strong>دلالية</strong>                            (تحمل معنى منطقي).
+                        </div>
+
+                        <h3>لماذا HTML الدلالي ضروري؟</h3>
+                        <table class="comparison-table">
+                            <thead>
+                                <tr>
+                                    <th>الفائدة</th>
+                                    <th>التفاصيل</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>تحسين SEO</strong></td>
+                                    <td>جوجل يفهم هيكل الصفحة بشكل أفضل → ترتيب أعلى</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>إمكانية الوصول</strong></td>
+                                    <td>قارئات الشاشة تساعد المكفوفين على التنقل بذكاء</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>سهولة الصيانة</strong></td>
+                                    <td>الكود يصبح أوضح للمطورين الآخرين</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>المستقبل الآمن</strong></td>
+                                    <td>المتصفحات والتقنيات الجديدة تدعم الدلالة أولًا</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="section">
+                        <h2>1. <span class="tag-name">&lt;header&gt;</span> — الرأس (Header)</h2>
+                        <div class="functionality">
+                            <strong>الوظيفة</strong>:<br> يحتوي على <strong>مقدمة القسم أو الصفحة</strong>، مثل:<br> • الشعار<br> • عنوان رئيسي (<code>&lt;h1&gt;</code>)<br> • قائمة تنقل علوية (أحيانًا)
+                        </div>
+                        <div class="functionality">
+                            <strong>متى تستخدمه؟</strong><br> • <strong>مرة واحدة</strong> كرأس للصفحة.<br> • <strong>أيضًا</strong> كرأس لأي <code>&lt;article&gt;</code> أو <code>&lt;section&gt;</code>.
+                        </div>
+                        <div class="example">
+                            &lt;body&gt;<br> &nbsp;&nbsp;&lt;header&gt;
+                            <br> &nbsp;&nbsp;&nbsp;&nbsp;&lt;img src="logo.png" alt="شعار الموقع"&gt;<br> &nbsp;&nbsp;&nbsp;&nbsp;&lt;h1&gt;موقع التقنية العربي&lt;/h1&gt;<br> &nbsp;&nbsp;&nbsp;&nbsp;&lt;nav&gt;...&lt;/nav&gt;
+                            <br> &nbsp;&nbsp;&lt;/header&gt;
+                            <br> &nbsp;&nbsp;
+                            <br> &nbsp;&nbsp;&lt;article&gt;
+                            <br> &nbsp;&nbsp;&nbsp;&nbsp;&lt;header&gt;
+                            <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;h2&gt;مقال جديد عن HTML5&lt;/h2&gt;<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;نشر في 5 أبريل 2025&lt;/p&gt;<br> &nbsp;&nbsp;&nbsp;&nbsp;&lt;/header&gt;
+                            <br> &nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;محتوى المقال...&lt;/p&gt;<br> &nbsp;&nbsp;&lt;/article&gt;
+                            <br> &lt;/body&gt;
+                        </div>
+                        <div class="pro-tip">
+                            ✅ <strong>ملاحظة</strong>: لا يجب أن يحتوي <code>&lt;header&gt;</code> على <code>&lt;nav&gt;</code> — لكنه شائع.
+                        </div>
+                    </div>
+                    <div class="section">
+                        <h2>2. <span class="tag-name">&lt;nav&gt;</span> — التنقل (Navigation)</h2>
+                        <div class="functionality">
+                            <strong>الوظيفة</strong>:<br> يُستخدم <strong>فقط</strong> لمجموعات الروابط الرئيسية التي تساعد المستخدم على <strong>التنقل في الموقع</strong>.
+                        </div>
+                        <div class="warning">
+                            <strong>ما لا يُعتبر <code>&lt;nav&gt;</code>؟</strong><br> • روابط "شارك على وسائل التواصل".<br> • روابط داخل مقال (مثل "اقرأ أيضًا").<br> • زر "العودة للأعلى".
+                        </div>
+                        <div class="example">
+                            &lt;nav&gt;<br> &nbsp;&nbsp;&lt;ul&gt;
+                            <br> &nbsp;&nbsp;&nbsp;&nbsp;&lt;li&gt;&lt;a href="/"&gt;الرئيسية&lt;/a&gt;&lt;/li&gt;<br> &nbsp;&nbsp;&nbsp;&nbsp;&lt;li&gt;&lt;a href="/tutorials"&gt;الدروس&lt;/a&gt;&lt;/li&gt;<br> &nbsp;&nbsp;&nbsp;&nbsp;&lt;li&gt;&lt;a
+                            href="/contact"&gt;اتصل بنا&lt;/a&gt;&lt;/li&gt;<br> &nbsp;&nbsp;&lt;/ul&gt;
+                            <br> &lt;/nav&gt;
+                        </div>
+                        <div class="warning">
+                            ⚠️ <strong>تحذير</strong>: لا تستخدم <code>&lt;nav&gt;</code> لكل قائمة روابط — فقط للتنقل الرئيسي!
+                        </div>
+                    </div>
+                    <div class="section">
+                        <h2>3. <span class="tag-name">&lt;main&gt;</span> — المحتوى الرئيسي (Main Content)</h2>
+                        <div class="functionality">
+                            <strong>الوظيفة</strong>:<br> يحتوي على <strong>المحتوى الفريد</strong> للصفحة (غير المتكرر في صفحات أخرى).
+                        </div>
+                        <div class="functionality">
+                            <strong>القواعد الذهبية</strong>:<br> • <strong>يجب أن يكون واحدًا فقط</strong> في الصفحة.<br> • <strong>لا يحتوي</strong> على شعار، تنقل، إعلانات، تذييل.<br> • <strong>لا يُكرر</strong> في القوالب (Templates).
+                        </div>
+                        <div class="example">
+                            &lt;body&gt;<br> &nbsp;&nbsp;&lt;header&gt;...&lt;/header&gt;
+                            <br> &nbsp;&nbsp;&lt;nav&gt;...&lt;/nav&gt;
+                            <br> &nbsp;&nbsp;
+                            <br> &nbsp;&nbsp;&lt;main&gt;
+                            <br> &nbsp;&nbsp;&nbsp;&nbsp;&lt;h1&gt;كيف تتعلم HTML5؟&lt;/h1&gt;<br> &nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;هذا المقال يشرح...&lt;/p&gt;<br> &nbsp;&nbsp;&lt;/main&gt;
+                            <br> &nbsp;&nbsp;
+                            <br> &nbsp;&nbsp;&lt;aside&gt;...&lt;/aside&gt;
+                            <br> &nbsp;&nbsp;&lt;footer&gt;...&lt;/footer&gt;
+                            <br> &lt;/body&gt;
+                        </div>
+                        <div class="pro-tip">
+                            ✅ <strong>نصيحة SEO</strong>: جوجل يركز على محتوى <code>&lt;main&gt;</code> عند فهرسة الصفحة.
+                        </div>
+                    </div>
+                    <div class="section">
+                        <h2>4. <span class="tag-name">&lt;article&gt;</span> — مقال أو محتوى مستقل</h2>
+                        <div class="functionality">
+                            <strong>الوظيفة</strong>:<br> لمحتوى <strong>يمكن فصله</strong> عن بقية الصفحة دون فقدان معناه، مثل:<br> • مقال مدوّنة<br> • منشور على وسائل التواصل<br> • تعليق مستخدم<br> • منتج في متجر إلكتروني
+                        </div>
+                        <div class="functionality">
+                            <strong>خاصية مهمة</strong>:<br> يمكن تضمين <code>&lt;article&gt;</code> داخل <code>&lt;article&gt;</code> (مثل: تعليقات تحت مقال).
+                        </div>
+                        <div class="example">
+                            &lt;article&gt;<br> &nbsp;&nbsp;&lt;header&gt;
+                            <br> &nbsp;&nbsp;&nbsp;&nbsp;&lt;h2&gt;أهمية HTML الدلالي&lt;/h2&gt;<br> &nbsp;&nbsp;&nbsp;&nbsp;&lt;time datetime="2025-04-05"&gt;5 أبريل 2025&lt;/time&gt;<br> &nbsp;&nbsp;&lt;/header&gt;
+                            <br> &nbsp;&nbsp;&lt;p&gt;الشرح الكامل...&lt;/p&gt;<br> &nbsp;&nbsp;
+                            <br> &nbsp;&nbsp;&lt;section&gt;
+                            <br> &nbsp;&nbsp;&nbsp;&nbsp;&lt;h3&gt;التعليقات&lt;/h3&gt;
+                            <br> &nbsp;&nbsp;&nbsp;&nbsp;&lt;article&gt;
+                            <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;تعليق رائع!&lt;/p&gt;<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;footer&gt;— أحمد&lt;/footer&gt;<br> &nbsp;&nbsp;&nbsp;&nbsp;&lt;/article&gt;
+                            <br> &nbsp;&nbsp;&lt;/section&gt;
+                            <br> &lt;/article&gt;
+                        </div>
+                    </div>
+                    <div class="section">
+                        <h2>5. <span class="tag-name">&lt;section&gt;</span> — قسم منطقي</h2>
+                        <div class="functionality">
+                            <strong>الوظيفة</strong>:<br> لمجموعة من المحتوى <strong>لها علاقة موضوعية</strong>، وعادةً ما يكون لها <strong>عنوان</strong>.
+                        </div>
+                        <div class="functionality">
+                            <strong>متى تستخدم <code>&lt;section&gt;</code> وليس <code>&lt;div&gt;</code>؟</strong><br> • عندما يكون المحتوى <strong>جزءًا من مستند أكبر</strong>.<br> • عندما يمكنك تلخيصه بعنوان (<code>&lt;h1&gt;</code>–<code>&lt;h6&gt;</code>).
+                        </div>
+                        <div class="example">
+                            &lt;section&gt;<br> &nbsp;&nbsp;&lt;h2&gt;آخر الدروس&lt;/h2&gt;<br> &nbsp;&nbsp;&lt;article&gt;...&lt;/article&gt;
+                            <br> &nbsp;&nbsp;&lt;article&gt;...&lt;/article&gt;
+                            <br> &lt;/section&gt;
+                            <br><br> &lt;section&gt;
+
+                            <br> &nbsp;&nbsp;&lt;h2&gt;روابط مفيدة&lt;/h2&gt;<br> &nbsp;&nbsp;&lt;ul&gt;...&lt;/ul&gt;
+                            <br> &lt;/section&gt;
+                        </div>
+                        <div class="warning">
+                            ❌ <strong>لا تستخدم <code>&lt;section&gt;</code></strong> فقط لأغراض تنسيق CSS — استخدم <code>&lt;div&gt;</code> في هذه الحالة.
+                        </div>
+                    </div>
+                    <div class="section">
+                        <h2>6. <span class="tag-name">&lt;aside&gt;</span> — محتوى جانبي</h2>
+                        <div class="functionality">
+                            <strong>الوظيفة</strong>:<br> لمحتوى <strong>غير أساسي</strong> لكنه مرتبط بالمحتوى الرئيسي، مثل:<br> • إعلانات<br> • روابط ذات صلة<br> • تعريفات مصطلحات<br> • قائمة "المقالات الشائعة"
+                        </div>
+                        <div class="example">
+                            &lt;main&gt;<br> &nbsp;&nbsp;&lt;article&gt;...&lt;/article&gt;
+                            <br> &lt;/main&gt;
+                            <br><br> &lt;aside&gt;
+
+                            <br> &nbsp;&nbsp;&lt;h3&gt;مقالات ذات صلة&lt;/h3&gt;<br> &nbsp;&nbsp;&lt;ul&gt;
+                            <br> &nbsp;&nbsp;&nbsp;&nbsp;&lt;li&gt;&lt;a href="/css-guide"&gt;دليل CSS&lt;/a&gt;&lt;/li&gt;<br> &nbsp;&nbsp;&nbsp;&nbsp;&lt;li&gt;&lt;a href="/js-basics"&gt;أساسيات JavaScript&lt;/a&gt;&lt;/li&gt;<br> &nbsp;&nbsp;&lt;/ul&gt;
+                            <br> &lt;/aside&gt;
+                        </div>
+                        <div class="pro-tip">
+                            💡 <strong>تلميح</strong>: إذا أزلت <code>&lt;aside&gt;</code>، يجب أن يظل المحتوى الرئيسي مفهومًا.
+                        </div>
+                    </div>
+                    <div class="section">
+                        <h2>7. <span class="tag-name">&lt;footer&gt;</span> — التذييل (Footer)</h2>
+                        <div class="functionality">
+                            <strong>الوظيفة</strong>:<br> يحتوي على <strong>معلومات ختامية</strong> عن القسم أو الصفحة، مثل:<br> • حقوق الملكية<br> • روابط سياسة الخصوصية<br> • معلومات المؤلف (في المقالات)
+                        </div>
+                        <div class="functionality">
+                            <strong>يمكن استخدامه أكثر من مرة</strong>:<br> • تذييل للصفحة.<br> • تذييل لكل <code>&lt;article&gt;</code> أو <code>&lt;section&gt;</code>.
+                        </div>
+                        <div class="example">
+                            &lt;footer&gt;<br> &nbsp;&nbsp;&lt;p&gt;&amp;copy; 2025 موقع التقنية. جميع الحقوق محفوظة.&lt;/p&gt;<br> &nbsp;&nbsp;&lt;p&gt;إعداد: يحيى باقش&lt;/p&gt;<br> &lt;/footer&gt;
+                        </div>
+                    </div>
+                    <div class="section">
+                        <h2>مقارنة نهائية: <span class="tag-name">&lt;div&gt;</span> مقابل الوسوم الدلالية</h2>
+                        <table class="comparison-table">
+                            <thead>
+                                <tr>
+                                    <th>الحالة</th>
+                                    <th>استخدم</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>تقسيم تقني لـ CSS/JS</td>
+                                    <td><span class="tag-cell">&lt;div&gt;</span></td>
+                                </tr>
+                                <tr>
+                                    <td>رأس الصفحة</td>
+                                    <td><span class="tag-cell">&lt;header&gt;</span></td>
+                                </tr>
+                                <tr>
+                                    <td>تنقل رئيسي</td>
+                                    <td><span class="tag-cell">&lt;nav&gt;</span></td>
+                                </tr>
+                                <tr>
+                                    <td>محتوى فريد للصفحة</td>
+                                    <td><span class="tag-cell">&lt;main&gt;</span></td>
+                                </tr>
+                                <tr>
+                                    <td>مقال مستقل</td>
+                                    <td><span class="tag-cell">&lt;article&gt;</span></td>
+                                </tr>
+                                <tr>
+                                    <td>قسم له عنوان</td>
+                                    <td><span class="tag-cell">&lt;section&gt;</span></td>
+                                </tr>
+                                <tr>
+                                    <td>محتوى جانبي</td>
+                                    <td><span class="tag-cell">&lt;aside&gt;</span></td>
+                                </tr>
+                                <tr>
+                                    <td>تذييل</td>
+                                    <td><span class="tag-cell">&lt;footer&gt;</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="pro-tip">
+                            ✅ <strong>قاعدة بسيطة</strong>:<br> إذا كان بإمكانك وضع <strong>عنوان</strong> على المحتوى، فاستخدم <code>&lt;section&gt;</code> أو <code>&lt;article&gt;</code>.<br> إذا كان مجرد حاوية تقنية، فاستخدم <code>&lt;div&gt;</code>.
+                        </div>
+                    </div>
+                    <div class="section">
+                        <h2>هيكل صفحة ويب حديثة كاملة (مثال تطبيقي)</h2>
+                        <div class="example">
+                            &lt;!DOCTYPE html&gt;<br> &lt;html lang="ar" dir="rtl"&gt;<br> &lt;head&gt;
+                            <br> &nbsp;&nbsp;&lt;meta charset="UTF-8"&gt;<br> &nbsp;&nbsp;&lt;title&gt;موقع التقنية العربي&lt;/title&gt;<br> &lt;/head&gt;
+                            <br> &lt;body&gt;
+                            <br> &nbsp;&nbsp;&lt;header&gt;
+                            <br> &nbsp;&nbsp;&nbsp;&nbsp;&lt;h1&gt;موقع التقنية العربي&lt;/h1&gt;<br> &nbsp;&nbsp;&nbsp;&nbsp;&lt;nav&gt;
+                            <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;ul&gt;
+                            <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;li&gt;&lt;a href="/"&gt;الرئيسية&lt;/a&gt;&lt;/li&gt;<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;li&gt;&lt;a href="/tutorials"&gt;الدروس&lt;/a&gt;&lt;/li&gt;<br>                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/ul&gt;
+                            <br> &nbsp;&nbsp;&nbsp;&nbsp;&lt;/nav&gt;
+                            <br> &nbsp;&nbsp;&lt;/header&gt;
+                            <br><br> &nbsp;&nbsp;&lt;main&gt;
+
+                            <br> &nbsp;&nbsp;&nbsp;&nbsp;&lt;article&gt;
+                            <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;header&gt;
+                            <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;h2&gt;دليل HTML الدلالي&lt;/h2&gt;<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;نشر في &lt;time datetime="2025-04-05"&gt;5 أبريل 2025&lt;/time&gt;&lt;/p&gt;<br>                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/header&gt;
+                            <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;محتوى المقال...&lt;/p&gt;<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;footer&gt;
+                            <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;بقلم: يحيى باقش&lt;/p&gt;<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/footer&gt;
+                            <br> &nbsp;&nbsp;&nbsp;&nbsp;&lt;/article&gt;
+                            <br> &nbsp;&nbsp;&lt;/main&gt;
+                            <br><br> &nbsp;&nbsp;&lt;aside&gt;
+
+                            <br> &nbsp;&nbsp;&nbsp;&nbsp;&lt;h3&gt;روابط مفيدة&lt;/h3&gt;<br> &nbsp;&nbsp;&nbsp;&nbsp;&lt;ul&gt;...&lt;/ul&gt;
+                            <br> &nbsp;&nbsp;&lt;/aside&gt;
+                            <br><br> &nbsp;&nbsp;&lt;footer&gt;
+
+                            <br> &nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;&amp;copy; 2025 جميع الحقوق محفوظة.&lt;/p&gt;<br> &nbsp;&nbsp;&lt;/footer&gt;
+                            <br> &lt;/body&gt;
+                            <br> &lt;/html&gt;
+                        </div>
+                    </div>
+                    <div class="section">
+                        <h2>خلاصة الفصل 6: جدول مرجعي سريع</h2>
+                        <table class="summary-table">
+                            <thead>
+                                <tr>
+                                    <th>الوسم</th>
+                                    <th>المعنى</th>
+                                    <th>عدد مرات الاستخدام</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><span class="tag-cell">&lt;header&gt;</span></td>
+                                    <td>رأس الصفحة أو القسم</td>
+                                    <td>متعدد (مرة لكل قسم)</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="tag-cell">&lt;nav&gt;</span></td>
+                                    <td>تنقل رئيسي</td>
+                                    <td>1–2 (رئيسي + تنقل جانبي)</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="tag-cell">&lt;main&gt;</span></td>
+                                    <td>المحتوى الفريد</td>
+                                    <td><strong>مرة واحدة فقط</strong></td>
+                                </tr>
+                                <tr>
+                                    <td><span class="tag-cell">&lt;article&gt;</span></td>
+                                    <td>محتوى مستقل</td>
+                                    <td>متعدد</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="tag-cell">&lt;section&gt;</span></td>
+                                    <td>قسم له عنوان</td>
+                                    <td>متعدد</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="tag-cell">&lt;aside&gt;</span></td>
+                                    <td>محتوى جانبي</td>
+                                    <td>متعدد</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="tag-cell">&lt;footer&gt;</span></td>
+                                    <td>تذييل الصفحة أو القسم</td>
+                                    <td>متعدد</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="pro-tip" style="margin-top: 20px;">
+                            🎯 <strong>تذكّر دائمًا</strong>:<br> HTML الدلالي ليس "ترفًا تقنيًا"، بل <strong>أساس بناء ويب شامل، سريع، ومرئي</strong>.<br> كلما زادت دلالة هيكل صفحتك، أصبح موقعك <strong>أقرب إلى المستخدم، المتصفح، ومحركات البحث</strong>.
+                        </div>
+                    </div>
+                    <footer>
+                        <p>تصميم احترافي باستخدام HTML5 وCSS3 الحديث</p>
+                    </footer>
+                </div>
+
+                <!-- Chapter 7 -->
+                <div id="chapter-7" class="chapter">
+                    <div class="chapter-header">
+                        <h1>الفصل 7️⃣: وسوم HTML5 الجديدة</h1>
+                        <p class="subtitle">دليل المطور العربي لأحدث عناصر HTML التي غيّرت طريقة بناء الويب</p>
+                    </div>
+                    <div class="intro">
+                        <h2>📌 مقدمة: لماذا أضاف HTML5 وسومًا جديدة؟</h2>
+                        <p>لم تُنشأ وسوم HTML5 الجديدة من فراغ. كل وسم منها يحل <strong>مشكلة واقعية</strong> واجهها مطورو الويب لسنوات، مثل:</p>
+                        <ul style="margin: 15px 0 20px 20px; direction: rtl;">
+                            <li>الحاجة إلى تمثيل <strong>الوقت والتاريخ</strong> بدقة.</li>
+                            <li>عرض <strong>شريط تقدم</strong> أو <strong>مقياس أداء</strong> دون JavaScript.</li>
+                            <li>إنشاء <strong>محتوى قابل للطي</strong> (مثل الأسئلة الشائعة).</li>
+                            <li>دعم <strong>الوسائط المتعددة</strong> بشكل أصلي.</li>
+                        </ul>
+
+                        <div class="pro-tip">
+                            ✅ <strong>الهدف المشترك</strong>: جعل HTML أكثر <strong>دلالة</strong>، <strong>كفاءة</strong>، و<strong>شمولًا</strong> — دون الاعتماد على JavaScript أو CSS معقد.
+                        </div>
+                    </div>
+                    <div class="section">
+                        <h2>1. <span class="tag-name">&lt;time&gt;</span> — لتمثيل الوقت والتاريخ بدقة</h2>
+                        <div class="functionality">
+                            <strong>المشكلة التي يحلها</strong>:<br> النصوص مثل "5 أبريل 2025" <strong>غير قابلة للتفسير آليًّا</strong> من قبل المتصفحات أو محركات البحث.
+                        </div>
+                        <div class="functionality">
+                            <strong>الحل</strong>:<br> استخدم <code>&lt;time&gt;</code> مع سمة <code>datetime</code> لتقديم <strong>صيغة قياسية</strong> (ISO 8601).
+                        </div>
+                        <div class="example">
+                            &lt;!-- تاريخ --&gt;<br> &lt;p&gt;النشر في &lt;time datetime="2025-04-05"&gt;5 أبريل 2025&lt;/time&gt;.&lt;/p&gt;<br><br> &lt;!-- وقت --&gt;<br> &lt;p&gt;الاجتماع يبدأ في &lt;time datetime="14:30"&gt;2:30 مساءً&lt;/time&gt;.&lt;/p&gt;<br><br>                            &lt;!-- تاريخ ووقت معًا --&gt;<br> &lt;time datetime="2025-04-05T14:30:00+03:00"&gt;<br> &nbsp;&nbsp;السبت، 5 أبريل 2025، الساعة 2:30 ظهرًا (بتوقيت السعودية)<br> &lt;/time&gt;
+                        </div>
+                        <div class="pro-tip">
+                            ✅ <strong>الفوائد</strong>:<br> • <strong>محركات البحث</strong> تفهرس التاريخ بدقة (مفيدة للمحتوى الإخباري).<br> • <strong>الهواتف الذكية</strong> تعرض زر "إضافة إلى التقويم" تلقائيًا.<br> • <strong>قارئات الشاشة</strong> تقرأ
+                            الوقت بشكل منطقي.<br><br> 💡 <strong>نصيحة</strong>: استخدم دائمًا التنسيق <code>YYYY-MM-DD</code> في <code>datetime</code>.
+                        </div>
+                    </div>
+                    <div class="section">
+                        <h2>2. <span class="tag-name">&lt;mark&gt;</span> — تمييز النص</h2>
+                        <p>رغم ظهوره في الفصل 3، إلا أن <code>&lt;mark&gt;</code> <strong>وسم HTML5 جديد</strong> يُستخدم لتمييز النصوص ذات الأهمية السياقية (مثل نتائج البحث).</p>
+                        <div class="example">
+                            &lt;p&gt;تم العثور على الكلمة &lt;mark&gt;HTML5&lt;/mark&gt; في 12 مستندًا.&lt;/p&gt;
+                        </div>
+                        <div class="pro-tip">
+                            ✅ يمكنك تخصيص لونه عبر CSS:<br>
+                            <code>mark { background-color: #ffeb3b; color: #000; }</code>
+                        </div>
+                    </div>
+                    <div class="section">
+                        <h2>3. <span class="tag-name">&lt;progress&gt;</span> — شريط التقدم</h2>
+                        <div class="functionality">
+                            <strong>الوظيفة</strong>:<br> لعرض <strong>تقدم عملية جارية</strong> (مثل رفع ملف، تحميل صفحة، إكمال نموذج).
+                        </div>
+                        <div class="example">
+                            &lt;!-- شريط تقدم محدد --&gt;<br> &lt;progress value="70" max="100"&gt;70%&lt;/progress&gt;<br><br> &lt;!-- شريط تقدم غير محدد (يدور) --&gt;<br> &lt;progress&gt;&lt;/progress&gt;
+                        </div>
+                        <div class="functionality">
+                            <strong>متى تستخدمه؟</strong><br> • أثناء رفع ملفات.<br> • في خطوات التسجيل (Step 2 of 5).<br> • عند تحميل محتوى ديناميكي.
+                        </div>
+                        <div class="warning">
+                            ⚠️ <strong>لا تستخدمه</strong> لعرض "المهارات" (مثل: HTML: 90%) — هذا <strong>مقياس</strong>، وليس تقدمًا. استخدم <code>&lt;meter&gt;</code> بدلًا من ذلك.
+                        </div>
+                    </div>
+                    <div class="section">
+                        <h2>4. <span class="tag-name">&lt;meter&gt;</span> — المقياس (Gauge)</h2>
+                        <div class="functionality">
+                            <strong>الوظيفة</strong>:<br> لعرض <strong>قيمة ضمن نطاق معروف</strong> (مثل: سعة البطارية، درجة الحرارة، نسبة الاستخدام).
+                        </div>
+                        <div class="example">
+                            &lt;!-- سعة التخزين --&gt;<br> &lt;meter value="75" min="0" max="100"&gt;75%&lt;/meter&gt;<br><br> &lt;!-- درجة حرارة --&gt;<br> &lt;meter low="10" high="30" optimum="22" value="25"&gt;<br> &nbsp;&nbsp;25°م
+                            <br> &lt;/meter&gt;
+                        </div>
+                        <div class="functionality">
+                            <strong>السمات المتقدمة</strong>:<br> • <code>low</code> / <code>high</code>: تحديد النطاق "المحتمل".<br> • <code>optimum</code>: القيمة المثلى (يغير اللون تلقائيًا).
+                        </div>
+                        <div class="pro-tip">
+                            ✅ <strong>استخدامات شائعة</strong>:<br> • مساحة التخزين.<br> • تقييمات المنتجات.<br> • مؤشرات الأداء (KPIs).
+                        </div>
+                    </div>
+                    <div class="section">
+                        <h2>5. <span class="tag-name">&lt;details&gt;</span> و<span class="tag-name">&lt;summary&gt;</span> — محتوى قابل للطي</h2>
+                        <div class="functionality">
+                            <strong>المشكلة التي يحلها</strong>:<br> كثيرًا ما نحتاج إلى إخفاء/إظهار محتوى (مثل الأسئلة الشائعة)، لكننا كنا نعتمد على JavaScript.
+                        </div>
+                        <div class="functionality">
+                            <strong>الحل</strong>:<br> HTML5 يوفّر وسومًا أصلية <strong>بدون أي كود برمجي</strong>!
+                        </div>
+                        <div class="example">
+                            &lt;details&gt;<br> &nbsp;&nbsp;&lt;summary&gt;ما هو HTML الدلالي؟&lt;/summary&gt;<br> &nbsp;&nbsp;&lt;p&gt;HTML الدلالي هو استخدام وسوم تعبر عن معنى المحتوى...&lt;/p&gt;<br> &lt;/details&gt;
+                            <br><br> &lt;details open&gt;<br> &nbsp;&nbsp;&lt;summary&gt;كيف أبدأ بتعلم HTML؟&lt;/summary&gt;<br> &nbsp;&nbsp;&lt;p&gt;ابدأ بفهم الهيكل الأساسي...&lt;/p&gt;<br> &lt;/details&gt;
+                        </div>
+                        <div class="pro-tip">
+                            ✅ <strong>الميزات</strong>:<br> • يعمل بدون JavaScript.<br> • <code>open</code>: لجعله مفتوحًا افتراضيًا.<br> • متوافق مع جميع المتصفحات الحديثة.<br><br> 💡 <strong>نصيحة تصميم</strong>: يمكنك تخصيص مظهر السهم عبر CSS باستخدام
+                            <code>::marker</code>.
+                        </div>
+                    </div>
+                    <div class="section">
+                        <h2>6. <span class="tag-name">&lt;dialog&gt;</span> — مربع حواري أصلي</h2>
+                        <div class="functionality">
+                            <strong>الوظيفة</strong>:<br> لإنشاء <strong>نافذة منبثقة</strong> (Modal) دون JavaScript.
+                        </div>
+                        <div class="example">
+                            &lt;dialog id="myDialog"&gt;<br> &nbsp;&nbsp;&lt;p&gt;هل أنت متأكد من الحذف؟&lt;/p&gt;<br> &nbsp;&nbsp;&lt;button id="close"&gt;إلغاء&lt;/button&gt;<br> &lt;/dialog&gt;
+                            <br><br> &lt;button id="openDialog"&gt;افتح النافذة&lt;/button&gt;<br><br> &lt;script&gt;
+
+                            <br> &nbsp;&nbsp;const dialog = document.getElementById('myDialog');<br> &nbsp;&nbsp;document.getElementById('openDialog').onclick = () =&gt; dialog.showModal();<br> &nbsp;&nbsp;document.getElementById('close').onclick = ()
+                            =&gt; dialog.close();<br> &lt;/script&gt;
+                        </div>
+                        <div class="pro-tip">
+                            ✅ <strong>الفوائد</strong>:<br> • يمنع التمرير خلف النافذة تلقائيًا.<br> • يركز لوحة المفاتيح داخل النافذة.<br> • يدعم زر ESC للإغلاق.<br><br> ⚠️ <strong>ملاحظة</strong>: يتطلب القليل من JavaScript للتحكم، لكن الهيكل أصلي.
+                        </div>
+                    </div>
+                    <div class="section">
+                        <h2>7. <span class="tag-name">&lt;template&gt;</span> — قالب غير مرئي</h2>
+                        <div class="functionality">
+                            <strong>الوظيفة</strong>:<br> لتعريف <strong>كود HTML لن يُعرض فورًا</strong>، لكن يمكن استخدامه لاحقًا عبر JavaScript (مثالي لإعادة الاستخدام).
+                        </div>
+                        <div class="example">
+                            &lt;template id="userCard"&gt;<br> &nbsp;&nbsp;&lt;div class="card"&gt;<br> &nbsp;&nbsp;&nbsp;&nbsp;&lt;h3&gt;&lt;/h3&gt;
+                            <br> &nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;&lt;/p&gt;
+                            <br> &nbsp;&nbsp;&lt;/div&gt;
+                            <br> &lt;/template&gt;
+                            <br><br> &lt;script&gt;
+
+                            <br> &nbsp;&nbsp;const template = document.getElementById('userCard');<br> &nbsp;&nbsp;const clone = template.content.cloneNode(true);<br> &nbsp;&nbsp;clone.querySelector('h3').textContent = 'أحمد';<br> &nbsp;&nbsp;document.body.appendChild(clone);
+                            <br> &lt;/script&gt;
+                        </div>
+                        <div class="pro-tip">
+                            ✅ <strong>الفوائد</strong>:<br> • لا يُبطئ تحميل الصفحة (لأنه غير مرئي).<br> • يحافظ على بنية HTML داخل الملف نفسه.<br> • بديل نظيف لـ <code>innerHTML</code>.
+                        </div>
+                    </div>
+                    <div class="section">
+                        <h2>8. <span class="tag-name">&lt;data&gt;</span> — ربط محتوى بشفرة آلية</h2>
+                        <div class="functionality">
+                            <strong>الوظيفة</strong>:<br> لربط نص مرئي <strong>بقيمة آلية</strong> (مثل رمز دولة، معرف منتج).
+                        </div>
+                        <div class="example">
+                            &lt;p&gt;العملة: &lt;data value="SAR"&gt;ريال سعودي&lt;/data&gt;&lt;/p&gt;<br> &lt;p&gt;الدولة: &lt;data value="SA"&gt;السعودية&lt;/data&gt;&lt;/p&gt;
+                        </div>
+                        <div class="pro-tip">
+                            ✅ <strong>الفائدة</strong>:<br> • البرامج أو الروبوتات يمكنها قراءة <code>value</code> دون تفسير النص العربي.<br> • مفيد في تطبيقات التجارة الإلكترونية أو قواعد البيانات.
+                        </div>
+                    </div>
+                    <div class="section">
+                        <h2>خلاصة الفصل 7: جدول مرجعي سريع</h2>
+                        <table class="summary-table">
+                            <thead>
+                                <tr>
+                                    <th>الوسم</th>
+                                    <th>الاستخدام الأمثل</th>
+                                    <th>مثال واقعي</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><span class="tag-cell">&lt;time&gt;</span></td>
+                                    <td>تواريخ وأوقات</td>
+                                    <td>نشر المقال، مواعيد الاجتماعات</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="tag-cell">&lt;progress&gt;</span></td>
+                                    <td>تقدم عملية</td>
+                                    <td>رفع ملف، خطوات التسجيل</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="tag-cell">&lt;meter&gt;</span></td>
+                                    <td>قيمة ضمن نطاق</td>
+                                    <td>سعة البطارية، تقييمات</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="tag-cell">&lt;details&gt;</span> + <span class="tag-cell">&lt;summary&gt;</span></td>
+                                    <td>محتوى قابل للطي</td>
+                                    <td>الأسئلة الشائعة، التعليمات</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="tag-cell">&lt;dialog&gt;</span></td>
+                                    <td>نافذة منبثقة</td>
+                                    <td>تأكيد الحذف، تنبيهات</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="tag-cell">&lt;template&gt;</span></td>
+                                    <td>قوالب HTML</td>
+                                    <td>بطاقات المستخدم، عناصر متكررة</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="tag-cell">&lt;data&gt;</span></td>
+                                    <td>ربط نص بقيمة آلية</td>
+                                    <td>رموز العملات، أكواد الدول</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="pro-tip" style="margin-top: 20px;">
+                            🎯 <strong>تذكّر دائمًا</strong>:<br> هذه الوسوم ليست "إضافات زخرفية"، بل <strong>أدوات قوية</strong> تقلل اعتمادك على JavaScript، وتجعل موقعك أسرع، أكثر أمانًا، وأسهل في الصيانة.<br> استخدمها عندما <strong>تناسب السياق</strong>                            — وليس فقط لأنها جديدة!
+                        </div>
+                    </div>
+                    <footer>
+                        <p>تصميم احترافي باستخدام HTML5 وCSS3 الحديث</p>
+                    </footer>
+                </div>
+
+                <!-- Chapter 8 -->
+                <div id="chapter-8" class="chapter">
+                    <div class="chapter-header">
+                        <h1>الفصل 8️⃣: وسوم غير مدعومة في HTML5 + البدائل الحديثة</h1>
+                        <p class="subtitle">دليل المطور العربي لاجتياز مزالق الماضي وبناء ويب مستقبلي</p>
+                    </div>
+                    <div class="intro">
+                        <h2>📌 مقدمة: لماذا تم إيقاف وسوم HTML القديمة؟</h2>
+                        <p>مع تطور الويب، أصبح من الواضح أن <strong>خلط المحتوى بالتنسيق</strong> (مثل استخدام <code>&lt;font&gt;</code> لتغيير الخط) يؤدي إلى:</p>
+                        <ul style="margin: 15px 0 20px 20px; direction: rtl;">
+                            <li>كود غير منظم وصعب الصيانة.</li>
+                            <li>صفحات غير متجاوبة مع الجوال.</li>
+                            <li>ضعف في إمكانية الوصول (Accessibility).</li>
+                            <li>اعتماد مفرط على سلوكيات غير معيارية.</li>
+                        </ul>
+
+                        <p>لذلك، قررت لجنة معايير الويب (W3C) <strong>إيقاف دعم</strong> العديد من الوسوم في HTML5، وتشجيع المطورين على:</p>
+                        <ul style="margin: 15px 0 20px 20px; direction: rtl;">
+                            <li>استخدام <strong>HTML للدلالة</strong> (ماهية المحتوى).</li>
+                            <li>استخدام <strong>CSS للتنسيق</strong> (كيف يبدو المحتوى).</li>
+                        </ul>
+
+                        <div class="pro-tip">
+                            ✅ <strong>المبدأ الذهبي</strong>:<br> إذا كان الوسم يتحكم <strong>بالمظهر فقط</strong>، فاستخدم <strong>CSS</strong>.<br> إذا كان يصف <strong>نوع المحتوى</strong>، فاستخدم <strong>HTML</strong>.
+                        </div>
+                    </div>
+                    <div class="section">
+                        <h2>1. <span class="tag-name">&lt;font&gt;</span> — تغيير الخط (تم إيقافه تمامًا)</h2>
+                        <div class="functionality">
+                            <strong>المشكلة</strong>:<br> • يخلط بين المحتوى والتصميم.<br> • لا يعمل في HTML5.
+                        </div>
+                        <div class="example">
+                            &lt;!-- مثال قديم (خاطئ) --&gt;<br> &lt;font face="Arial" size="4" color="red"&gt;نص أحمر&lt;/font&gt;
+                        </div>
+                        <div class="example">
+                            &lt;!-- بديل حديث (CSS) --&gt;<br> &lt;p style="font-family: Arial, sans-serif; font-size: 1.25rem; color: red;"&gt;<br> &nbsp;&nbsp;نص أحمر<br> &lt;/p&gt;
+                        </div>
+                        <div class="pro-tip">
+                            💡 <strong>أفضل ممارسة</strong>: استخدم ملف CSS خارجي:<br>
+                            <code>.highlight { font-family: Arial, sans-serif; font-size: 1.25rem; color: red; }</code>
+                        </div>
+                    </div>
+                    <div class="section">
+                        <h2>2. <span class="tag-name">&lt;center&gt;</span> — توسيط المحتوى (تم إيقافه)</h2>
+                        <div class="functionality">
+                            <strong>المشكلة</strong>:<br> • غير دلالي.<br> • لا يدعم التصميم المتجاوب.
+                        </div>
+                        <div class="example">
+                            &lt;!-- مثال قديم (خاطئ) --&gt;<br> &lt;center&gt;نص مركّز&lt;/center&gt;
+                        </div>
+                        <div class="functionality">
+                            <strong>البديل الحديث (CSS)</strong>:<br> • <strong>لتوسيط نص</strong>: <code>text-align: center;</code><br> • <strong>لتوسيط كتلة (مثل div)</strong>: <code>margin: 0 auto;</code>
+                        </div>
+                        <div class="example">
+                            &lt;div class="centered-box"&gt;<br> &nbsp;&nbsp;&lt;p&gt;نص مركّز داخل حاوية&lt;/p&gt;<br> &lt;/div&gt;
+                            <br><br> &lt;style&gt;
+
+                            <br> .centered-box {<br> &nbsp;&nbsp;width: 80%;<br> &nbsp;&nbsp;margin: 0 auto;<br> &nbsp;&nbsp;text-align: center;<br> }
+                            <br> &lt;/style&gt;
+                        </div>
+                    </div>
+                    <div class="section">
+                        <h2>3. <span class="tag-name">&lt;strike&gt;</span> و<span class="tag-name">&lt;s&gt;</span> (القديم) — نص مشطوب</h2>
+                        <div class="functionality">
+                            <strong>الملاحظة</strong>:<br> • <code>&lt;strike&gt;</code> <strong>تم إيقافه</strong>.<br> • <code>&lt;s&gt;</code> <strong>ما زال مدعومًا</strong>، لكنه بصري فقط.
+                        </div>
+                        <div class="example">
+                            &lt;!-- مثال قديم (خاطئ) --&gt;<br> &lt;strike&gt;سعر قديم&lt;/strike&gt;
+                        </div>
+                        <div class="example">
+                            &lt;!-- بديل دلالي (مفضّل) --&gt;<br> &lt;del&gt;سعر قديم&lt;/del&gt; &lt;!-- إذا كان حذفًا رسميًا --&gt;<br> &lt;s&gt;فكرة ملغاة&lt;/s&gt; &lt;!-- إذا كان إلغاءً غير رسمي --&gt;
+                        </div>
+                        <div class="pro-tip">
+                            ✅ استخدم <code>&lt;del&gt;</code> مع <code>&lt;ins&gt;</code> للمقارنات:<br>
+                            <code>&lt;p&gt;السعر: &lt;del&gt;100 ريال&lt;/del&gt; &lt;ins&gt;75 ريال&lt;/ins&gt;&lt;/p&gt;</code>
+                        </div>
+                    </div>
+                    <div class="section">
+                        <h2>4. <span class="tag-name">&lt;frame&gt;</span>, <span class="tag-name">&lt;frameset&gt;</span>, <span class="tag-name">&lt;noframes&gt;</span> — تقسيم الصفحة</h2>
+                        <div class="functionality">
+                            <strong>المشكلة</strong>:<br> • يُضعف SEO (محركات البحث لا تفهرس الإطارات جيدًا).<br> • غير متوافق مع الجوال.<br> • يخلق مشاكل في التنقل (مثل زر "العودة").
+                        </div>
+                        <div class="example">
+                            &lt;!-- مثال قديم (خاطئ) --&gt;<br> &lt;frameset cols="25%,75%"&gt;<br> &nbsp;&nbsp;&lt;frame src="menu.html"&gt;<br> &nbsp;&nbsp;&lt;frame src="content.html"&gt;<br> &lt;/frameset&gt;
+                        </div>
+                        <div class="functionality">
+                            <strong>البدائل الحديثة</strong>:<br> • <strong>لدمج محتوى خارجي</strong>: استخدم <code>&lt;iframe&gt;</code> (بشكل محدود).<br> • <strong>لتخطيط الصفحة</strong>: استخدم <strong>CSS Grid</strong> أو <strong>Flexbox</strong>.
+                        </div>
+                        <div class="example">
+                            &lt;!-- للقوائم الجانبية --&gt;<br> &lt;nav&gt;...&lt;/nav&gt;
+                            <br> &lt;main&gt;...&lt;/main&gt;
+                            <br><br> &lt;!-- لعرض فيديو يوتيوب --&gt;<br> &lt;iframe src="https://www.youtube.com/embed/..." title="فيديو"&gt;&lt;/iframe&gt;
+                        </div>
+                        <div class="warning">
+                            ⚠️ <strong>تحذير</strong>: لا تستخدم <code>&lt;iframe&gt;</code> إلا عند الضرورة (يؤثر على الأداء والأمان).
+                        </div>
+                    </div>
+                    <div class="section">
+                        <h2>5. <span class="tag-name">&lt;marquee&gt;</span> — نص متحرك</h2>
+                        <div class="functionality">
+                            <strong>المشكلة</strong>:<br> • مزعج للمستخدمين.<br> • غير مهني.<br> • <strong>غير مدعوم في HTML5</strong>.
+                        </div>
+                        <div class="example">
+                            &lt;!-- مثال قديم (خاطئ) --&gt;<br> &lt;marquee&gt;أخبار عاجلة!&lt;/marquee&gt;
+                        </div>
+                        <div class="pro-tip">
+                            ✅ <strong>البديل الحديث</strong>:<br> • <strong>تجنبه تمامًا</strong>.<br> • إذا كنت بحاجة إلى إشعارات: استخدم <strong>شريط إعلان ثابت</strong> مع CSS/JavaScript بسيط.<br><br>
+                            <code>&lt;div class="alert-banner"&gt;📢 أخبار عاجلة: تحديث جديد متاح الآن!&lt;/div&gt;</code>
+                        </div>
+                    </div>
+                    <div class="section">
+                        <h2>6. <span class="tag-name">&lt;blink&gt;</span> — نص وميض</h2>
+                        <div class="functionality">
+                            <strong>الحالة</strong>:<br> • <strong>لم يُعتمد أبدًا في معايير HTML</strong>.<br> • كان خاصًا بـ Netscape.<br> • <strong>ممنوع في جميع المتصفحات الحديثة</strong>.
+                        </div>
+                        <div class="warning">
+                            ✅ <strong>الحل</strong>:<br> • <strong>لا بديل</strong> — لا تستخدمه أبدًا.<br> • الوميض يُعتبر <strong>إساءة لتجربة المستخدم</strong>.
+                        </div>
+                    </div>
+                    <div class="section">
+                        <h2>7. <span class="tag-name">&lt;big&gt;</span>, <span class="tag-name">&lt;tt&gt;</span>, <span class="tag-name">&lt;acronym&gt;</span> — وسوم تنسيق قديمة</h2>
+                        <table class="comparison-table">
+                            <thead>
+                                <tr>
+                                    <th>الوسم القديم</th>
+                                    <th>السبب</th>
+                                    <th>البديل الحديث</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>&lt;big&gt;</code></td>
+                                    <td>تكبير النص</td>
+                                    <td><code>font-size: larger</code> في CSS</td>
+                                </tr>
+                                <tr>
+                                    <td><code>&lt;tt&gt;</code></td>
+                                    <td>خط ثابت العرض</td>
+                                    <td><code>&lt;code&gt;</code> أو <code>font-family: monospace</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>&lt;acronym&gt;</code></td>
+                                    <td>اختصارات</td>
+                                    <td><code>&lt;abbr title="..."&gt;</code></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="example">
+                            &lt;!-- قديم --&gt;<br> &lt;acronym title="HyperText Markup Language"&gt;HTML&lt;/acronym&gt;<br><br> &lt;!-- حديث --&gt;<br> &lt;abbr title="HyperText Markup Language"&gt;HTML&lt;/abbr&gt;
+                        </div>
+                    </div>
+                    <div class="section">
+                        <h2>جدول مرجعي شامل: الوسوم المتقادمة vs البدائل</h2>
+                        <table class="summary-table">
+                            <thead>
+                                <tr>
+                                    <th>الوسم القديم</th>
+                                    <th>الحالة</th>
+                                    <th>البديل الموصى به</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><span class="tag-cell">&lt;font&gt;</span></td>
+                                    <td>❌ غير مدعوم</td>
+                                    <td>CSS: <code>font-family</code>, <code>color</code>, <code>font-size</code></td>
+                                </tr>
+                                <tr>
+                                    <td><span class="tag-cell">&lt;center&gt;</span></td>
+                                    <td>❌ غير مدعوم</td>
+                                    <td>CSS: <code>text-align: center</code> أو <code>margin: 0 auto</code></td>
+                                </tr>
+                                <tr>
+                                    <td><span class="tag-cell">&lt;strike&gt;</span></td>
+                                    <td>❌ غير مدعوم</td>
+                                    <td><code>&lt;del&gt;</code> (دلالي) أو <code>&lt;s&gt;</code> (بصري)</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="tag-cell">&lt;frame&gt;</span>, <span class="tag-cell">&lt;frameset&gt;</span></td>
+                                    <td>❌ غير مدعوم</td>
+                                    <td>CSS Layout (Grid/Flexbox) أو <code>&lt;iframe&gt;</code> بحذر</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="tag-cell">&lt;marquee&gt;</span></td>
+                                    <td>❌ غير مدعوم</td>
+                                    <td>شريط إعلان ثابت + CSS</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="tag-cell">&lt;blink&gt;</span></td>
+                                    <td>❌ غير موجود</td>
+                                    <td>لا تستخدمه</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="tag-cell">&lt;big&gt;</span></td>
+                                    <td>❌ غير مدعوم</td>
+                                    <td>CSS: <code>font-size</code></td>
+                                </tr>
+                                <tr>
+                                    <td><span class="tag-cell">&lt;tt&gt;</span></td>
+                                    <td>❌ غير مدعوم</td>
+                                    <td><code>&lt;code&gt;</code> أو CSS: <code>font-family: monospace</code></td>
+                                </tr>
+                                <tr>
+                                    <td><span class="tag-cell">&lt;acronym&gt;</span></td>
+                                    <td>❌ غير مدعوم</td>
+                                    <td><code>&lt;abbr&gt;</code></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="section">
+                        <h2>كيف تتحقق من أن كودك خالٍ من الوسوم المتقادمة؟</h2>
+                        <ol style="margin: 15px 0 20px 20px; direction: rtl;">
+                            <li><strong>استخدم مدقق W3C</strong>:<br>
+                                <a href="https://validator.w3.org" target="_blank">https://validator.w3.org</a><br> → سيُحذرك من أي وسم غير مدعوم.</li>
+
+                            <li><strong>في VS Code</strong>:<br> ثبّت إضافة <strong>HTMLHint</strong> أو <strong>W3C Validation</strong>.</li>
+
+                            <li><strong>افحص يدويًّا</strong>:<br> ابحث في مشروعك عن:<br>
+                                <code>font</code>, <code>center</code>, <code>strike</code>, <code>marquee</code>, <code>frame</code></li>
+                        </ol>
+                        <div class="pro-tip">
+                            ✅ <strong>نصيحة احترافية</strong>:<br> اجعل التحقق من صحة HTML جزءًا من سير عملك اليومي — ستوفر ساعات من التصحيح لاحقًا!
+                        </div>
+                    </div>
+                    <div class="section">
+                        <div class="pro-tip" style="margin: 0; border-left: 4px solid var(--primary);">
+                            🎯 <strong>خاتمة الفصل</strong>:<br> التخلّي عن الوسوم القديمة ليس "اتباعًا للموضة"، بل <strong>خطوة ضرورية</strong> لبناء مواقع:<br> • أسرع<br> • أكثر أمانًا<br> • متوافقة مع الجوال<br> • سهلة الصيانة<br> • مرئية لمحركات البحث<br><br>                            كل سطر كود تكتبه اليوم يجب أن يخدم <strong>المستخدم أولاً</strong>، وليس عادات الماضي.
+                        </div>
+                    </div>
+                    <footer>
+                        <p>✅ تم الآن إكمال جميع فصول المرجع الثمانية!</p>
+                    </footer>
+                </div>
+            </main>
+        </div>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const navLinks = document.querySelectorAll('.nav-link');
+                const chapters = document.querySelectorAll('.chapter');
+
+                navLinks.forEach(link => {
+                    link.addEventListener('click', function(e) {
+                        e.preventDefault();
+
+                        // تحديث الرابط النشط
+                        // Remove active class from all links and chapters
+                        navLinks.forEach(l => l.classList.remove('active'));
+                        chapters.forEach(c => c.classList.remove('active'));
+
+                        // Add active class to clicked link
+                        this.classList.add('active');
+
+                        // التمرير بسلاسة إلى الفصل المطلوب
+                        // Show corresponding chapter
+                        const chapterId = this.getAttribute('data-chapter');
+                        const targetChapter = document.getElementById(`chapter-${chapterId}`);
+
+                        if (targetChapter) {
+                            targetChapter.scrollIntoView({
+                                behavior: 'smooth',
+                                block: 'start'
+                            });
+                        }
+                        document.getElementById(`chapter-${chapterId}`).classList.add('active');
+                    });
+                });
+            });
+        </script>
+    </body>
+
+    </html>
+
+
+
+    <script>
+    </script>
+</body>
+
+</html>
